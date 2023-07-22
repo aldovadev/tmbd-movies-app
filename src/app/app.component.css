@@ -1,28 +1,22 @@
 .navbar .navbar-brand
 {
-    color: #E50914;
+    color: #d90166;
     font-weight: bold;
 }
 
 .navbar-nav .nav-item .nav-link
 {
-    color: #E50914;
+    color: #d90166;
 }
 
 .navbar-nav .nav-item .nav-link:hover {
-  color: #ffffff;
+  color: #333;
   text-shadow:  rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: 0.4s;
 }
 
-.navbar-nav .nav-item .nav-link.active {
-  color: #ffffff;
-  text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  transition: 0.4s;
-}
-
 .navbar .navbar-brand:hover {
-  color: #ffffff;
+  color: #333;
   text-shadow:  rgba(0, 0, 0, 0.24) 0px 3px 8px;
   transition: 0.4s;
 }

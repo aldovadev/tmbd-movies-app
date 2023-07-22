@@ -15,14 +15,25 @@ export class MovieApiServiceService {
   //bannerapidata
 
   bannerApiData(): Observable<any> {
-    return this.http.get(`${this.baseurl}/trending/all/week?api_key=${this.apikey}`);
+    return this.http.get(`${this.baseurl}/trending/all/day?api_key=${this.apikey}`);
   }
 
 
-  // trendingmovieapidata
-  trendingMovieApiData(): Observable<any> {
-    return this.http.get(`${this.baseurl}/trending/movie/day?api_key=${this.apikey}`);
+  // upcomingmovieapidata
+  upcomingMovieApiData(page: number): Observable<any> {
+    return this.http.get(`${this.baseurl}/movie/upcoming?api_key=${this.apikey}&page=${page}`);
   }
+
+  // popularmovieapidata
+  popularMovieApiData(page: number): Observable<any> {
+    return this.http.get(`${this.baseurl}/movie/popular?api_key=${this.apikey}&page=${page}`);
+  }
+
+  // topRatedmovieapidata
+  topRatedMovieApiData(page: number): Observable<any> {
+    return this.http.get(`${this.baseurl}/movie/top_rated?api_key=${this.apikey}&page=${page}`);
+  }
+
 
   // searchmovive
   getSearchMovie(data: any): Observable<any> {

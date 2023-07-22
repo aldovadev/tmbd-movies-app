@@ -1,22 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { trigger, transition, animate, style } from '@angular/animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms', style({ opacity: 1 })),
+      ]),
+    ]),
+  ],
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private service: MovieApiServiceService, private title: Title, private meta: Meta) {
-    this.title.setTitle('Home - showtime');
+  constructor(private service: MovieApiServiceService, public spinner: NgxSpinnerService, private title: Title, private meta: Meta) {
+    this.title.setTitle('Home - Aldova');
     this.meta.updateTag({ name: 'description', content: 'watch online movies' });
 
   }
 
   bannerResult: any = [];
-  trendingMovieResult: any = [];
+  upcomingMovieResult: any = [];
   actionMovieResult: any = [];
   adventureMovieResult: any = [];
   animationMovieResult: any = [];
@@ -25,20 +35,40 @@ export class HomeComponent implements OnInit {
   sciencefictionMovieResult: any = [];
   thrillerMovieResult: any = [];
 
+  hasMoreData = true;
+  currentPage = 1;
+
+  scrollDistance = 1; // Adjust the value as needed
+  scrollUpDistance = 1; // Adjust the value as needed
+
   ngOnInit(): void {
     this.bannerData();
-    this.trendingData();
-    this.actionMovie();
-    this.adventureMovie();
-    this.comedyMovie();
-    this.animationMovie();
-    this.documentaryMovie();
-    this.sciencefictionMovie();
-    this.thrillerMovie();
+  }
+
+  loadMoreMovies() {
+    this.spinner.show();
+
+    if (!this.hasMoreData) {
+      return;
+    }
+
+    this.currentPage++;
+
+    this.service.upcomingMovieApiData(this.currentPage).subscribe({
+      next: (result) => {
+        this.upcomingMovieResult = [...this.upcomingMovieResult, ...result.results];
+        console.log(result, 'upcomingresult#');
+      },
+      error: (error) => {
+        console.error('Error fetching next page:', error);
+      },
+      complete: () => {
+        this.spinner.hide();
+      }
+    });
   }
 
 
-  // bannerdata
   bannerData() {
     this.service.bannerApiData().subscribe((result) => {
       console.log(result, 'bannerresult#');
@@ -46,11 +76,11 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  trendingData() {
-    this.service.trendingMovieApiData().subscribe((result) => {
-      console.log(result, 'trendingresult#');
-      this.trendingMovieResult = result.results;
-      // this.trendingMovieResult
+  upcomingData() {
+    this.service.upcomingMovieApiData(1).subscribe((result) => {
+      console.log(result, 'upcomingresult#');
+      this.upcomingMovieResult = result.results;
+
     });
   }
 

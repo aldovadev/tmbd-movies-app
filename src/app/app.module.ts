@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-// import { InfiniteScrollModule } from 'ngx-infinite-scroll'; // Import ngx-infinite-scroll module
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -10,7 +10,11 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 import { HttpClientModule } from '@angular/common/http';
 import { MovieApiServiceService } from './service/movie-api-service.service';
 
+
 import { ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 
 @NgModule({
   declarations: [
@@ -24,6 +28,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserAnimationsModule,
+    InfiniteScrollModule,
+    NgxSpinnerModule
   ],
   providers: [MovieApiServiceService],
   bootstrap: [AppComponent]

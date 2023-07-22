@@ -17,13 +17,12 @@ export class AppComponent {
 
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.navbg = {
-        'background-color': '#33333333',
-        'box-shadow': 'rgba(255, 255, 255, 0.24) 0px 3px 8px',
+        'background-color': '#fbfbfb33',
+        'box-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
       }
     } else {
       this.navbg = {
-        'background-color': '#ffffff33',
-        'box-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
+        'background-color': '#33333333',
       }
     }
   }

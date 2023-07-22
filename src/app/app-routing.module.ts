@@ -5,13 +5,13 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
 import { SearchComponent } from './pages/search/search.component';
 
 const routes: Routes = [
-  {path:'',component:HomeComponent},
-  {path:'search',component:SearchComponent},
-  {path:'movie/:id',component:MovieDetailsComponent}
+  { path: '', component: HomeComponent },
+  { path: 'search', component: SearchComponent },
+  { path: 'movie/:id', component: MovieDetailsComponent }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule,]
 })
 export class AppRoutingModule { }
