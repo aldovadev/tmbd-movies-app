@@ -1,0 +1,28 @@
+.navbar .navbar-brand
+{
+    color: #E50914;
+    font-weight: bold;
+}
+
+.navbar-nav .nav-item .nav-link
+{
+    color: #E50914;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #ffffff;
+  text-shadow:  rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: 0.4s;
+}
+
+.navbar-nav .nav-item .nav-link.active {
+  color: #ffffff;
+  text-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: 0.4s;
+}
+
+.navbar .navbar-brand:hover {
+  color: #ffffff;
+  text-shadow:  rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  transition: 0.4s;
+}
