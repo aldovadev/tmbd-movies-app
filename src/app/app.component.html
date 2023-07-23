@@ -1,7 +1,10 @@
 <!-- navbar start  -->
 <nav class="navbar navbar-expand-lg fixed-top" [ngStyle]="navbg">
   <div class="container-fluid">
-    <a class="navbar-brand" routerLink="">Aldova Movies</a>
+    <a class="navbar-brand" routerLink="">
+      <img src="../assets/logo.png" alt="logo">
+      <p>Aldova-dev</p>
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -12,24 +15,21 @@
           <a class="nav-link active" aria-current="page" routerLink="">Home</a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" routerLink="" routerLinkActive="active">Favorites</a>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" routerLink="" routerLinkActive="active">Popular</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="" routerLinkActive="active">Top Rated</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="" routerLinkActive="active">Favorites</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" routerLink="" routerLinkActive="active">Upcoming</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="search" routerLinkActive="active">Search</a>
         </li>
         <div class="wrap">
           <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search movies?">
-            <button type="submit" class="searchButton">
+            <input type="text" class="searchTerm" placeholder="Search movies?" />
+            <button type="submit" class="searchButton" routerLink="search">
               <i class="fa fa-search"></i>
             </button>
           </div>

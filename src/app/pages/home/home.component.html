@@ -1,9 +1,8 @@
 <!-- banner start  -->
 <div class="contain-fluid">
-  <div id="carouselExampleDark" class="carousel carousel-dark slide">
+  <div id="carouselExampleDark" class="carousel slide">
     <div class="carousel-inner">
-      <div class="carousel-item active" data-bs-interval="10000" *ngFor="let b of bannerResult; let i=index"
-        [ngClass]="{active:i===1}">
+      <div class="carousel-item" *ngFor="let b of bannerResult; let i=index" [ngClass]="{active:i===1}">
         <img src="https://image.tmdb.org/t/p/original{{ b.backdrop_path }}" class="d-block w-100"
           alt="/src/assets/alt.jpg">
         <div class="carousel-caption">
@@ -26,27 +25,39 @@
 <div class="contain mt-3 mb-5 p-4">
   <div class="contain mt-3 mb-5 p-4">
     <div class="row">
-      <h4 class="">Trending Movies</h4>
+      <div class="desc-container">
+        <h3>Kategori :</h3>
+        <h4> Trending Movies</h4>
+      </div>
       <div class="rowposter mt-3 p-2">
         <ng-container *ngFor="let t of upcomingMovieResult">
-          <div *ngIf="t.poster_path" class="card-container">
-            <img src="https://image.tmdb.org/t/p/original{{ t.poster_path }}" class="rowimg largeposter" alt="..."
-              [routerLink]="['/movie', t.id]">
+          <div class="card-container">
+            <ng-container *ngIf="t.poster_path; else noPoster">
+              <img src="https://image.tmdb.org/t/p/original{{ t.poster_path }}" class="rowimg largeposter" alt="..."
+                [routerLink]="['/movie', t.id]">
+            </ng-container>
+            <ng-template #noPoster>
+              <div class="no-poster">
+                <h3>No Poster Available</h3>
+                <h3>404</h3>
+              </div>
+            </ng-template>
             <div class="title-container">
-              <h5>{{t.title}}</h5>
+              <a [routerLink]="[' /movie', t.id]">
+                <h5>{{t.title}}</h5>
+              </a>
             </div>
             <div class="rating-star">
-              <div class="rating-star">
-                <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
-                  <span class="fa fa-star" [ngClass]="{ 'checked': i < getFilledStars(t.vote_average) }"
-                    [style.color]="hasHalfStar(t.vote_average) && i === getFilledStars(t.vote_average) ? '#FFD700' : ''"></span>
-                </ng-container>
-              </div>
+              <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
+                <span *ngIf="getFilledStars(t.vote_average, _)" class="fa fa-star filled-star"></span>
+                <span *ngIf="getHalfStars(t.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
+                <span *ngIf="getEmptyStars(t.vote_average, _)" class="fa fa-star-o"></span>
+              </ng-container>
             </div>
             <div class="control-container">
               <h6>Rating : {{t.vote_average}}</h6>
               <button class="fav-button">
-                <span class="fa fa-star"></span>
+                <span class="fa fa-heart"></span>
                 <span>Favorites</span>
               </button>
             </div>
@@ -55,8 +66,8 @@
 
         <div *ngIf="hasMoreData" infinite-scroll [infiniteScrollDistance]="scrollDistance"
           [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">
-          <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="small" color="#333" type="line-scale-party"
-            [fullScreen]="false"></ngx-spinner>
+          <ngx-spinner bdColor="" size="small" color="#333" type="line-scale-party" [fullScreen]="false"></ngx-spinner>
+          <!-- loading... -->
         </div>
 
       </div>

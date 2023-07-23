@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadMoreMovies() {
-    // this.spinner.show();
+    this.spinner.show();
 
     if (!this.hasMoreData) {
       return;
@@ -63,19 +63,27 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching next page:', error);
       },
       complete: () => {
-        // this.spinner.hide();
+        this.spinner.hide();
       }
     });
   }
 
-  // Function to calculate the number of filled stars
-  getFilledStars(ratingValue: any): number {
-    return Math.floor(ratingValue / 2);
+  getFilledStars(rating: any, index: number): boolean {
+    const value = rating - (2 * index);
+    const star = value >= 0
+    return star;
   }
 
-  // Function to check if a half-filled star is needed
-  hasHalfStar(ratingValue: any): boolean {
-    return ratingValue % 2 !== 0;
+  getHalfStars(rating: any, index: number): boolean {
+    const value = rating - (2 * index);
+    const star = value > 1 && value < 2;
+    return star;
+  }
+
+  getEmptyStars(rating: any, index: number): boolean {
+    const value = (2 * index) - rating;
+    const star = value >= 1;
+    return star;
   }
 
   bannerData() {
