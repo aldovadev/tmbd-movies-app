@@ -28,12 +28,15 @@ export class GenreComponent implements OnInit {
   scrollUpDistance = 1;
 
   ngOnInit(): void {
-    this.getParamId = this.router.snapshot.paramMap.get('id');
 
-    console.log(this.getParamId, 'getparamid#');
+    this.router.paramMap.subscribe((params) => {
+      this.getParamId = params.get('id');
+      this.currentPage = 1;
+      this.movieResult = []
+      this.loadMoreMovies()
+    });
 
     this.title.setTitle(`Category | ${this.getParamId}`);
-    this.loadMoreMovies()
   }
 
   loadMoreMovies() {
@@ -48,10 +51,6 @@ export class GenreComponent implements OnInit {
     this.service.genreMovieApiData(this.currentPage, this.getGenreId(this.getParamId)).subscribe({
       next: (result) => {
         this.movieResult = [...this.movieResult, ...result.results];
-        console.log(result, 'movieresult#');
-      },
-      error: (error) => {
-        console.error('Error fetching next page:', error);
       },
       complete: () => {
         this.spinner.hide();

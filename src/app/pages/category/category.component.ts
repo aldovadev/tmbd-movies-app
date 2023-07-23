@@ -18,7 +18,6 @@ export class CategoryComponent implements OnInit {
 
   }
 
-
   movieResult: any = []
   getParamId: any
 
@@ -27,42 +26,47 @@ export class CategoryComponent implements OnInit {
 
   scrollDistance = 1;
   scrollUpDistance = 1;
+  private key = 'favoritesMovies';
 
   ngOnInit(): void {
-    this.getParamId = this.router.snapshot.paramMap.get('id');
-
-    console.log(this.getParamId, 'getparamid#');
+    this.router.paramMap.subscribe((params) => {
+      this.getParamId = params.get('id');
+      this.currentPage = 1;
+      this.movieResult = []
+      this.loadMoreMovies()
+    });
 
     this.title.setTitle(`Category | ${this.getParamId}`);
-    this.loadMoreMovies()
   }
+
 
   loadMoreMovies() {
     this.spinner.show();
 
-    if (!this.hasMoreData) {
-      return;
-    }
-
-    this.currentPage++;
-
-    this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
-      next: (result) => {
-        this.movieResult = [...this.movieResult, ...result.results];
-        console.log(result, 'movieresult#');
-      },
-      error: (error) => {
-        console.error('Error fetching next page:', error);
-      },
-      complete: () => {
-        this.spinner.hide();
+    if (this.getParamId === 'favorites') {
+      this.movieResult = JSON.parse(localStorage.getItem(this.key) || '[]');
+    } else {
+      if (!this.hasMoreData) {
+        return;
       }
-    });
+
+      this.currentPage++;
+
+      this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
+        next: (result) => {
+          this.movieResult = [...this.movieResult, ...result.results];
+        },
+        complete: () => {
+          this.spinner.hide();
+        }
+      });
+    }
   }
 
   getCategory(): string {
     var data: any
     switch (this.getParamId) {
+      case 'favorites': data = 'Favorites'; break;
       case 'upcoming': data = 'Upcoming'; break;
       case 'top_rated': data = 'Top Rated'; break;
       case 'popular': data = 'Popular'; break;

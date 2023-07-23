@@ -56,7 +56,7 @@
             </div>
             <div class="control-container">
               <h6>Rating : {{t.vote_average}}</h6>
-              <button class="fav-button">
+              <button class="fav-button" (click)="saveToFavorites(t)">
                 <span class="fa fa-heart"></span>
                 <span>Favorites</span>
               </button>

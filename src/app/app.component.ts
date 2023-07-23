@@ -6,10 +6,12 @@ import { Component, HostListener } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
   title = 'aldova';
   navbg: any = {
     'background-color': '#fbfbfb88',
   }
+
 
   @HostListener('document:scroll') scrollover() {
     console.log(document.body.scrollTop, 'scrolllength#');

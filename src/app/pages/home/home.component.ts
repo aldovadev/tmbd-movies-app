@@ -29,9 +29,17 @@ export class HomeComponent implements OnInit {
 
   scrollDistance = 1;
   scrollUpDistance = 1;
+  private key = 'favoritesMovies';
 
   ngOnInit(): void {
     this.bannerData();
+  }
+
+  saveToFavorites(data: any) {
+    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+    storedData.push(data);
+    localStorage.setItem(this.key, JSON.stringify(storedData));
+    console.log(storedData, 'dataFavorites#');
   }
 
   loadMoreMovies() {
@@ -46,10 +54,6 @@ export class HomeComponent implements OnInit {
     this.service.categoryMovieApiData(this.currentPage, 'upcoming').subscribe({
       next: (result) => {
         this.upcomingMovieResult = [...this.upcomingMovieResult, ...result.results];
-        console.log(result, 'upcomingresult#');
-      },
-      error: (error) => {
-        console.error('Error fetching next page:', error);
       },
       complete: () => {
         this.spinner.hide();
@@ -77,7 +81,6 @@ export class HomeComponent implements OnInit {
 
   bannerData() {
     this.service.bannerApiData().subscribe((result) => {
-      console.log(result, 'bannerresult#');
       this.bannerResult = result.results;
     });
   }
