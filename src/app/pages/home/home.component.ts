@@ -7,7 +7,7 @@ import { trigger, transition, animate, style } from '@angular/animations';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.scss'],
   animations: [
     trigger('fadeIn', [
       transition(':enter', [
@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   loadMoreMovies() {
-    this.spinner.show();
+    // this.spinner.show();
 
     if (!this.hasMoreData) {
       return;
@@ -63,11 +63,20 @@ export class HomeComponent implements OnInit {
         console.error('Error fetching next page:', error);
       },
       complete: () => {
-        this.spinner.hide();
+        // this.spinner.hide();
       }
     });
   }
 
+  // Function to calculate the number of filled stars
+  getFilledStars(ratingValue: any): number {
+    return Math.floor(ratingValue / 2);
+  }
+
+  // Function to check if a half-filled star is needed
+  hasHalfStar(ratingValue: any): boolean {
+    return ratingValue % 2 !== 0;
+  }
 
   bannerData() {
     this.service.bannerApiData().subscribe((result) => {

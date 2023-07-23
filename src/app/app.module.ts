@@ -15,7 +15,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
-
 @NgModule({
   declarations: [
     AppComponent,

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'showtime'`, () => {
+  it(`should have as title 'aldova'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('showtime');
+    expect(app.title).toEqual('aldova');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('showtime app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('Aldova-movies-app is running!');
   });
 });

@@ -1,0 +1,141 @@
+.carousel-inner {
+  height: 700px;
+
+  .carousel-item {
+    .carousel-caption {
+      h2 {
+        width: 100%;
+        color: #d90166;
+        font-weight: normal;
+        font-size: 30px;
+        text-shadow: 0 0 1px #fbfbfb;
+      }
+
+      p {
+        width: 100%;
+        color: #fbfbfb;
+        text-shadow: 0 0 1px #333333;
+      }
+    }
+
+    img {
+      height: 700px;
+      object-fit: cover;
+      background-color: #00000033;
+    }
+
+    .carousel span {
+      color: #333333;
+    }
+  }
+}
+
+.row {
+  h4 {
+    color: #d90166;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .rowposter {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    justify-items: center;
+    width: 100vw;
+
+    .card-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 320px;
+      margin: 20px 10px;
+      transition: 0.4s;
+
+      .rowimg {
+        object-fit: contain;
+        box-sizing: content-box;
+        transition: transform 450ms;
+        margin-top: 30px;
+      }
+
+      .rating-star {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: auto;
+        width: 60%;
+      }
+
+      .control-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+
+        .fav-button {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          border: none;
+          height: 40px;
+          width: 120px;
+          font-size: 15px;
+          background-color: #000;
+          color: #fff;
+          border-radius: 5px;
+          cursor: pointer;
+
+          span {
+            margin: 0px 5px;
+          }
+
+          h6 {
+            margin: 0px;
+          }
+
+          button {
+            margin: 0px;
+          }
+        }
+      }
+      .title-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 30px;
+
+        h5 {
+          text-align: center;
+          font-weight: lighter;
+          margin: 0px;
+        }
+      }
+
+      .largeposter {
+        height: 400px;
+        width: 320px;
+      }
+
+      .largeposter:hover {
+        cursor: pointer;
+      }
+    }
+
+    .card-container:hover {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      scale: (1.01);
+      transition: 0.4s;
+    }
+
+    @media (max-width: 768px) {
+      .card-container {
+        transform: scale(0.6);
+      }
+    }
+  }
+}

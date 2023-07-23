@@ -3,10 +3,10 @@ import { Component, HostListener } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'showtime';
+  title = 'aldova';
   navbg: any = {
     'background-color': '#ffffff33',
     'box-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
@@ -17,7 +17,7 @@ export class AppComponent {
 
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.navbg = {
-        'background-color': '#fbfbfb33',
+        'background-color': '#fbfbfb',
         'box-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
       }
     } else {
