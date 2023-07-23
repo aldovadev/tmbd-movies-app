@@ -1,36 +1,12 @@
-<!-- banner start  -->
-<div class="contain-fluid">
-  <div id="carouselExampleDark" class="carousel slide">
-    <div class="carousel-inner">
-      <div class="carousel-item" *ngFor="let b of bannerResult; let i=index" [ngClass]="{active:i===1}">
-        <img src="https://image.tmdb.org/t/p/original{{ b.backdrop_path }}" class="d-block w-100"
-          alt="/src/assets/alt.jpg">
-        <div class="carousel-caption">
-          <h2>{{b.original_title}}</h2>
-          <p>{{b.overview}}</p>
-        </div>
-      </div>
-    </div>
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
-  </div>
-</div>
-
 <div class="contain mt-3 mb-5 p-4">
   <div class="contain mt-3 mb-5 p-4">
     <div class="row">
       <div class="desc-container">
-        <h3>PAGE :</h3>
-        <h4> Home</h4>
+        <h3>CATEGORY :</h3>
+        <h4> {{getCategory()}}</h4>
       </div>
       <div class="rowposter mt-3 p-2">
-        <ng-container *ngFor="let t of upcomingMovieResult">
+        <ng-container *ngFor="let t of movieResult">
           <div class="card-container">
             <ng-container *ngIf="t.poster_path; else noPoster">
               <img src="https://image.tmdb.org/t/p/original{{ t.poster_path }}" class="rowimg largeposter" alt="..."

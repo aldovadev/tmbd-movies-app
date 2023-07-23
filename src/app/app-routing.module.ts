@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 import { SearchComponent } from './pages/search/search.component';
+import { CategoryComponent } from './pages/category/category.component';
+import { GenreComponent } from './pages/genre/genre.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'search', component: SearchComponent },
+  { path: 'category/:id', component: CategoryComponent },
+  { path: 'genre/:id', component: GenreComponent },
+  { path: 'search/:id', component: SearchComponent },
   { path: 'movie/:id', component: MovieDetailsComponent }
 ];
 

@@ -63,6 +63,4 @@ export class MovieDetailsComponent implements OnInit {
       this.getMovieCastResult = result.cast;
     });
   }
-
-
 }

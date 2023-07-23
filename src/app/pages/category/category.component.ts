@@ -1,28 +1,26 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
-import { Title, Meta } from '@angular/platform-browser';
+import { Title } from '@angular/platform-browser';
 import { NgxSpinnerService } from 'ngx-spinner';
 
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-category',
+  templateUrl: './category.component.html',
+  styleUrls: ['./category.component.scss']
 })
-export class HomeComponent implements OnInit {
-
+export class CategoryComponent implements OnInit {
   constructor(
     private service: MovieApiServiceService,
     private spinner: NgxSpinnerService,
-    private title: Title,
-    private meta: Meta) {
-    this.title.setTitle('Home - Aldova');
-    this.meta.updateTag({ name: 'description', content: 'watch online movies' });
+    private router: ActivatedRoute,
+    private title: Title) {
+
   }
 
-  bannerResult: any = [];
-  upcomingMovieResult: any = [];
 
+  movieResult: any = []
+  getParamId: any
 
   hasMoreData = true;
   currentPage = 1;
@@ -31,7 +29,12 @@ export class HomeComponent implements OnInit {
   scrollUpDistance = 1;
 
   ngOnInit(): void {
-    this.bannerData();
+    this.getParamId = this.router.snapshot.paramMap.get('id');
+
+    console.log(this.getParamId, 'getparamid#');
+
+    this.title.setTitle(`Category | ${this.getParamId}`);
+    this.loadMoreMovies()
   }
 
   loadMoreMovies() {
@@ -43,10 +46,10 @@ export class HomeComponent implements OnInit {
 
     this.currentPage++;
 
-    this.service.categoryMovieApiData(this.currentPage, 'upcoming').subscribe({
+    this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
       next: (result) => {
-        this.upcomingMovieResult = [...this.upcomingMovieResult, ...result.results];
-        console.log(result, 'upcomingresult#');
+        this.movieResult = [...this.movieResult, ...result.results];
+        console.log(result, 'movieresult#');
       },
       error: (error) => {
         console.error('Error fetching next page:', error);
@@ -55,6 +58,16 @@ export class HomeComponent implements OnInit {
         this.spinner.hide();
       }
     });
+  }
+
+  getCategory(): string {
+    var data: any
+    switch (this.getParamId) {
+      case 'upcoming': data = 'Upcoming'; break;
+      case 'top_rated': data = 'Top Rated'; break;
+      case 'popular': data = 'Popular'; break;
+    }
+    return data;
   }
 
   getFilledStars(rating: any, index: number): boolean {
@@ -73,12 +86,5 @@ export class HomeComponent implements OnInit {
     const value = (2 * index) - rating;
     const star = value >= 1;
     return star;
-  }
-
-  bannerData() {
-    this.service.bannerApiData().subscribe((result) => {
-      console.log(result, 'bannerresult#');
-      this.bannerResult = result.results;
-    });
   }
 }
