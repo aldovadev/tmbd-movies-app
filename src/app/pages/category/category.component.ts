@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
 import { Title } from '@angular/platform-browser';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-category',
@@ -12,7 +11,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class CategoryComponent implements OnInit {
   constructor(
     private service: MovieApiServiceService,
-    private spinner: NgxSpinnerService,
     private router: ActivatedRoute,
     private title: Title) {
 
@@ -41,7 +39,6 @@ export class CategoryComponent implements OnInit {
 
 
   loadMoreMovies() {
-    this.spinner.show();
 
     if (this.getParamId === 'favorites') {
       this.movieResult = JSON.parse(localStorage.getItem(this.key) || '[]');
@@ -55,9 +52,6 @@ export class CategoryComponent implements OnInit {
       this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
         next: (result) => {
           this.movieResult = [...this.movieResult, ...result.results];
-        },
-        complete: () => {
-          this.spinner.hide();
         }
       });
     }

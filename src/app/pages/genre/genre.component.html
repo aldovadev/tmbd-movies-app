@@ -42,8 +42,7 @@
 
         <div *ngIf="hasMoreData" infinite-scroll [infiniteScrollDistance]="scrollDistance"
           [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">
-          <ngx-spinner bdColor="" size="small" color="#333" type="line-scale-party" [fullScreen]="false"></ngx-spinner>
-          <!-- loading... -->
+          Loading...
         </div>
 
       </div>

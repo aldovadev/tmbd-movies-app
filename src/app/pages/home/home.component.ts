@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -13,7 +12,6 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private service: MovieApiServiceService,
-    private spinner: NgxSpinnerService,
     private title: Title,
     private meta: Meta) {
     this.title.setTitle('Home - Aldova');
@@ -43,8 +41,6 @@ export class HomeComponent implements OnInit {
   }
 
   loadMoreMovies() {
-    this.spinner.show();
-
     if (!this.hasMoreData) {
       return;
     }
@@ -54,9 +50,6 @@ export class HomeComponent implements OnInit {
     this.service.categoryMovieApiData(this.currentPage, 'upcoming').subscribe({
       next: (result) => {
         this.upcomingMovieResult = [...this.upcomingMovieResult, ...result.results];
-      },
-      complete: () => {
-        this.spinner.hide();
       }
     });
   }

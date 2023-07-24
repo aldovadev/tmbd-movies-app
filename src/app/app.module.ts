@@ -13,7 +13,6 @@ import { MovieApiServiceService } from './service/movie-api-service.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
-import { NgxSpinnerModule } from 'ngx-spinner';
 import { GenreComponent } from './pages/genre/genre.component';
 import { CategoryComponent } from './pages/category/category.component';
 
@@ -33,7 +32,6 @@ import { CategoryComponent } from './pages/category/category.component';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     InfiniteScrollModule,
-    NgxSpinnerModule
   ],
   providers: [MovieApiServiceService],
   bootstrap: [AppComponent]

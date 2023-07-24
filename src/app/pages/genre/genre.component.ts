@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
 import { Title } from '@angular/platform-browser';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-genre',
@@ -12,7 +11,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class GenreComponent implements OnInit {
   constructor(
     private service: MovieApiServiceService,
-    private spinner: NgxSpinnerService,
     private router: ActivatedRoute,
     private title: Title) {
 
@@ -40,7 +38,6 @@ export class GenreComponent implements OnInit {
   }
 
   loadMoreMovies() {
-    this.spinner.show();
 
     if (!this.hasMoreData) {
       return;
@@ -52,9 +49,6 @@ export class GenreComponent implements OnInit {
       next: (result) => {
         this.movieResult = [...this.movieResult, ...result.results];
       },
-      complete: () => {
-        this.spinner.hide();
-      }
     });
   }
 
