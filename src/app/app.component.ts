@@ -39,7 +39,6 @@ export class AppComponent {
 
   search(): void {
     if (this.inputValue !== '') {
-      console.log(this.inputValue)
       this.router.navigate(['search/', this.inputValue]);
     }
   }

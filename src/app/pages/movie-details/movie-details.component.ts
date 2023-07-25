@@ -65,7 +65,6 @@ export class MovieDetailsComponent implements OnInit {
 
   getMovie(id: any) {
     this.service.getMovieDetails(id).subscribe(async (result) => {
-      console.log(result, 'getmoviedetails#');
       this.getMovieDetailResult = await result;
 
       // updatetags
@@ -85,7 +84,6 @@ export class MovieDetailsComponent implements OnInit {
 
   getVideo(id: any) {
     this.service.getMovieVideo(id).subscribe((result) => {
-      console.log(result, 'getMovieVideo#');
       result.results.forEach((element: any) => {
         if (element.type == "Trailer") {
           this.getMovieVideoResult = element.key;
