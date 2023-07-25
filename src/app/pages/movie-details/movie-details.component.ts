@@ -6,7 +6,7 @@ import { Title, Meta } from '@angular/platform-browser';
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
-  styleUrls: ['./movie-details.component.css']
+  styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit {
 
@@ -17,7 +17,6 @@ export class MovieDetailsComponent implements OnInit {
   getMovieCastResult: any;
   ngOnInit(): void {
     let getParamId = this.router.snapshot.paramMap.get('id');
-    console.log(getParamId, 'getparamid#');
 
     this.getMovie(getParamId);
     this.getVideo(getParamId);
