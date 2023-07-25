@@ -30,7 +30,9 @@ B. Feature and task done
 
 C. Note
 
-  Template source : [numofcode](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqblgzX2VtbFFma19LM0haSjNFcWx4ZFc4UWZUQXxBQ3Jtc0ttVXA2eE5OUkdCcFFKd0RiX3F2R3ZPX1FTWW9TbjNPdVlOSFg5SzlLeUtUek9vM2hzOFQ1ckJiTW9TdVNsdlZrYV8zUXllbXJhRnpZc3pJakRiazBLbDduT2FWSThDWUFPZTNpZzFfd2xKVmpQUDM0OA&q=https%3A%2F%2Fgithub.com%2Fsachindh97%2Fhowtomakenetflixlikewebsiteinangular14&v=H9z8jttAlRU)
+  1. Live testing : [movies.aldova-dev.site](https://movies.aldova-dev.site/)
+  
+  2. Template source : [numofcode](https://www.youtube.com/redirect?event=video_description&redir_token=QUFFLUhqblgzX2VtbFFma19LM0haSjNFcWx4ZFc4UWZUQXxBQ3Jtc0ttVXA2eE5OUkdCcFFKd0RiX3F2R3ZPX1FTWW9TbjNPdVlOSFg5SzlLeUtUek9vM2hzOFQ1ckJiTW9TdVNsdlZrYV8zUXllbXJhRnpZc3pJakRiazBLbDduT2FWSThDWUFPZTNpZzFfd2xKVmpQUDM0OA&q=https%3A%2F%2Fgithub.com%2Fsachindh97%2Fhowtomakenetflixlikewebsiteinangular14&v=H9z8jttAlRU)
 
 
 
