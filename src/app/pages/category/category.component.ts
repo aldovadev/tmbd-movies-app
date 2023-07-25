@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
+import { MovieApiService } from 'src/app/service/movie-api-service.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -10,11 +10,13 @@ import { Title } from '@angular/platform-browser';
 })
 export class CategoryComponent implements OnInit {
   constructor(
-    private service: MovieApiServiceService,
+    private service: MovieApiService,
     private router: ActivatedRoute,
     private title: Title) {
 
   }
+
+  favorites: any[] = [];
 
   movieResult: any = []
   getParamId: any
@@ -25,6 +27,7 @@ export class CategoryComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 1;
   private key = 'favoritesMovies';
+  tooltipText: string = 'Add to Favorites';
 
   ngOnInit(): void {
     this.router.paramMap.subscribe((params) => {
@@ -32,29 +35,56 @@ export class CategoryComponent implements OnInit {
       this.currentPage = 1;
       this.movieResult = []
       this.loadMoreMovies()
+      if (this.getParamId === 'favorites') {
+        let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+        this.favorites = storedData
+        this.movieResult = storedData
+        this.hasMoreData = false
+      } else this.hasMoreData = true
     });
 
     this.title.setTitle(`Category | ${this.getParamId}`);
   }
 
+  saveToFavorites(data: any) {
+    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
 
-  loadMoreMovies() {
+    if (!storedData.some((item) => item.id === data.id)) {
+      storedData.push(data);
+      localStorage.setItem(this.key, JSON.stringify(storedData));
+      this.favorites = storedData;
+    } else {
+      storedData = storedData.filter((item) => item.id !== data.id);
+      localStorage.setItem(this.key, JSON.stringify(storedData));
+      this.favorites = storedData;
+    }
 
     if (this.getParamId === 'favorites') {
-      this.movieResult = JSON.parse(localStorage.getItem(this.key) || '[]');
-    } else {
-      if (!this.hasMoreData) {
-        return;
-      }
-
-      this.currentPage++;
-
-      this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
-        next: (result) => {
-          this.movieResult = [...this.movieResult, ...result.results];
-        }
-      });
+      this.movieResult = this.favorites
     }
+  }
+
+
+  isInFavorites(data: any): boolean {
+    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+    if (storedData.some((item) => item.id === data.id)) {
+      this.tooltipText = 'Remove from Favorites';
+      return true;
+    } else {
+      this.tooltipText = 'Add to Favorites';
+      return false;
+    }
+  }
+
+  loadMoreMovies() {
+    this.currentPage++;
+
+    this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
+      next: (result) => {
+        this.movieResult = [...this.movieResult, ...result.results];
+      }
+    });
+
   }
 
   getCategory(): string {

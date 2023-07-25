@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
+import { MovieApiService } from 'src/app/service/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 
@@ -11,7 +11,7 @@ import { Title, Meta } from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private service: MovieApiServiceService,
+    private service: MovieApiService,
     private title: Title,
     private meta: Meta) {
     this.title.setTitle('Home - Aldova');
@@ -28,6 +28,7 @@ export class HomeComponent implements OnInit {
   scrollDistance = 1;
   scrollUpDistance = 1;
   private key = 'favoritesMovies';
+  tooltipText: string = 'Add to Favorites';
 
   ngOnInit(): void {
     this.bannerData();
@@ -35,9 +36,26 @@ export class HomeComponent implements OnInit {
 
   saveToFavorites(data: any) {
     let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
-    storedData.push(data);
-    localStorage.setItem(this.key, JSON.stringify(storedData));
-    console.log(storedData, 'dataFavorites#');
+
+    if (!storedData.some((item) => item.id === data.id)) {
+      storedData.push(data);
+      localStorage.setItem(this.key, JSON.stringify(storedData));
+    } else {
+      storedData = storedData.filter((item) => item.id !== data.id);
+      localStorage.setItem(this.key, JSON.stringify(storedData));
+    }
+  }
+
+
+  isInFavorites(data: any): boolean {
+    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+    if (storedData.some((item) => item.id === data.id)) {
+      this.tooltipText = 'Remove from Favorites';
+      return true;
+    } else {
+      this.tooltipText = 'Add to Favorites';
+      return false;
+    }
   }
 
   loadMoreMovies() {

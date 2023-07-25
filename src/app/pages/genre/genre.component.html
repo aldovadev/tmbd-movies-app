@@ -19,8 +19,8 @@
               </div>
             </ng-template>
             <div class="title-container">
-              <a [routerLink]="[' /movie', t.id]">
-                <h5>{{t.title}}</h5>
+              <a [routerLink]="['/movie', t.id]">
+                {{t.title}}
               </a>
             </div>
             <div class="rating-star">
@@ -31,10 +31,11 @@
               </ng-container>
             </div>
             <div class="control-container">
-              <h6>Rating : {{t.vote_average}}</h6>
-              <button class="fav-button">
-                <span class="fa fa-heart"></span>
+              <h6>Rating: {{ t.vote_average }}</h6>
+              <button class="fav-button" (click)="saveToFavorites(t)" [ngClass]="{ 'favorite': isInFavorites(t) }">
+                <span class="fa" [ngClass]="{ 'fa-heart': isInFavorites(t), 'fa-heart-o': !isInFavorites(t) }"></span>
                 <span>Favorites</span>
+                <span class="tooltiptext">{{tooltipText}}</span>
               </button>
             </div>
           </div>

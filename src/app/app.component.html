@@ -26,6 +26,17 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="category/upcoming" routerLinkActive="active">Upcoming</a>
         </li>
+        <li class="nav-item" ngbDropdown>
+          <a class="nav-link" ngbDropdownToggle>
+            Genre
+          </a>
+          <ul class="dropdown-menu" ngbDropdownMenu>
+            <li *ngFor="let genre of genresMapping">
+              <a class="dropdown-item" [routerLink]="'genre/'+ genre.link" routerLinkActive="active">{{
+                genre.value}}</a>
+            </li>
+          </ul>
+        </li>
         <div class="wrap">
           <div class="search">
             <input type="text" class="searchTerm" placeholder="Search movies?" />

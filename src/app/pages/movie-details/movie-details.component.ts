@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieApiServiceService } from 'src/app/service/movie-api-service.service';
+import { MovieApiService } from 'src/app/service/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 @Component({
@@ -11,7 +11,7 @@ import { Title, Meta } from '@angular/platform-browser';
 export class MovieDetailsComponent implements OnInit {
 
 
-  constructor(private service: MovieApiServiceService, private router: ActivatedRoute, private title: Title, private meta: Meta) { }
+  constructor(private service: MovieApiService, private router: ActivatedRoute, private title: Title, private meta: Meta) { }
   getMovieDetailResult: any;
   getMovieVideoResult: any;
   getMovieCastResult: any;
