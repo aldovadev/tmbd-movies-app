@@ -1,17 +1,22 @@
 .contain {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   width: 100%;
+  padding-top: 50px;
+  padding-bottom: 50px;
 
   .info-container {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 80%;
+    flex-wrap: wrap;
     margin-top: 50px;
+
     .image-container {
+      padding: 30px 20px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       img {
         width: 350px;
         height: auto;
@@ -19,8 +24,97 @@
     }
 
     .detail-container {
-      width: 100%;
-      padding-left: 20px;
+      max-width: 600px;
+      padding: 0px 30px;
+      padding-top: 30px;
+
+      h3 {
+        font-weight: bold;
+        text-align: justify;
+      }
+      h6 {
+        font-weight: lighter;
+        text-align: justify;
+        color: #333333;
+      }
+
+      .rating-container {
+        margin-top: 30px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        .rating-star {
+          margin: 10px 0px;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
+          width: 150px;
+
+          .filled-star {
+            color: yellow;
+            text-shadow: 0 0 1px #000;
+            font-size: 20px;
+          }
+
+          span {
+            font-size: 20px;
+          }
+        }
+
+        .vid-info {
+          margin: 10px 0px;
+        }
+      }
+
+      .genre-container {
+        width: 100%;
+        margin-top: 30px;
+
+        .data-con {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+
+          .genre {
+            margin-right: 15px;
+
+            .fa {
+              margin-right: 10px;
+              font-size: larger;
+              color: #d90166;
+            }
+          }
+        }
+      }
+
+      .sinop-container {
+        width: 100%;
+        text-align: justify;
+        margin-top: 30px;
+      }
+
+      .cast-container {
+        width: 100%;
+        text-align: justify;
+        margin-top: 30px;
+        img {
+          height: 40px;
+        }
+      }
+
+      .button-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+        margin-top: 30px;
+      }
     }
   }
 

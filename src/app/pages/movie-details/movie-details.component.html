@@ -1,20 +1,63 @@
-<div class="contain mt-3 mb-5 p-4">
-  <div class="contain mt-3 mb-5 p-4">
-    <div class="video-container">
+<div class="contain">
+  <!-- <div class="video-container">
       <iframe src="https://www.youtube.com/embed/dcpcwARBMJ4">
 
       </iframe>
+    </div> -->
+  <div class="info-container">
+    <div class="image-container">
+      <div *ngIf="getMovieDetailResult.poster_path">
+        <img src="https://image.tmdb.org/t/p/original/{{ getMovieDetailResult.poster_path }}">
+      </div>
     </div>
-    <div class="info-container">
-      <div class="image-container">
-        <div *ngIf="getMovieDetailResult.poster_path">
-          <img src="https://image.tmdb.org/t/p/original/{{ getMovieDetailResult.poster_path }}">
+
+    <div class="detail-container">
+      <h3>{{getMovieDetailResult.title | uppercase}}</h3>
+      <h6>{{getMovieDetailResult.tagline | uppercase}}</h6>
+
+      <div class="rating-container">
+        <div class="rating-star">
+          <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
+            <span *ngIf="getFilledStars(getMovieDetailResult.vote_average, _)" class="fa fa-star filled-star"></span>
+            <span *ngIf="getHalfStars(getMovieDetailResult.vote_average, _)"
+              class="fa fa-star-half-o filled-star"></span>
+            <span *ngIf="getEmptyStars(getMovieDetailResult.vote_average, _)" class="fa fa-star-o"></span>
+          </ng-container>
+        </div>
+        <div class="vid-info">
+          <span>{{getMovieDetailResult.spoken_languages[0].english_name | uppercase}} /
+            {{getMovieDetailResult.runtime}} MIN. / {{getMovieDetailResult.release_date | slice:0:4}}</span>
         </div>
       </div>
 
-      <div class="detail-container">
-        <h1> JUDUL FILM</h1>
-        <h2> JUDUL KECIL</h2>
+      <div class="genre-container">
+        <h5>THE GENRES</h5>
+        <div class="data-con">
+          <div class="genre" *ngFor="let item of getMovieDetailResult.genres">
+            <span class="fa fa-dot-circle-o"></span>
+            <span>{{item.name | uppercase}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sinop-container">
+        <h5>THE SYNOPSIS</h5>
+        <span>{{getMovieDetailResult.overview}}</span>
+      </div>
+
+      <div class="cast-container">
+        <h5>THE CAST</h5>
+        <div class="row">
+          <div *ngFor="let t of getMovieCastResult.cast">
+            <img src="https://image.tmdb.org/t/p/original{{ t.profil_path }}">
+          </div>
+        </div>
+      </div>
+
+      <div class="button-container">
+        <button>Website <span class="fa fa-link"></span></button>
+        <button>IMDB <span class="fa fa-film"></span></button>
+        <button>Trailer <span class="fa fa-play-circle-o"></span></button>
+        <button><span class="fa fa-arrow-circle-left"> Back</span></button>
       </div>
     </div>
-  </div>
