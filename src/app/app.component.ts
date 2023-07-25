@@ -1,11 +1,12 @@
 import { Component, HostListener } from '@angular/core';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  constructor(private router: Router) { }
 
   genresMapping = [
     { link: 'Action', value: 'Action' },
@@ -34,13 +35,20 @@ export class AppComponent {
     'background-color': '#fbfbfb88',
   }
 
+  inputValue: string = '';
+
+  search(): void {
+    if (this.inputValue !== '') {
+      console.log(this.inputValue)
+      this.router.navigate(['search/', this.inputValue]);
+    }
+  }
 
   @HostListener('document:scroll') scrollover() {
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.navbg = {
-        'background-color': '#33333333',
+        'background-color': '#fbfbfb',
         'box-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
-        'color': '#fbfbfb'
       }
     } else {
       this.navbg = {

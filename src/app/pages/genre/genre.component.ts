@@ -24,7 +24,7 @@ export class GenreComponent implements OnInit {
 
   scrollDistance = 1;
   scrollUpDistance = 1;
-  private key = 'favoritesMovies';
+  key = 'favoritesMovies';
   tooltipText: string = 'Add to Favorites';
 
   ngOnInit(): void {

@@ -78,13 +78,13 @@ export class CategoryComponent implements OnInit {
 
   loadMoreMovies() {
     this.currentPage++;
-
-    this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
-      next: (result) => {
-        this.movieResult = [...this.movieResult, ...result.results];
-      }
-    });
-
+    if (this.getParamId !== 'favorites') {
+      this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
+        next: (result) => {
+          this.movieResult = [...this.movieResult, ...result.results];
+        }
+      });
+    }
   }
 
   getCategory(): string {

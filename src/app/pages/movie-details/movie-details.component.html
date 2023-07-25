@@ -1,9 +1,5 @@
 <div class="contain">
-  <!-- <div class="video-container">
-      <iframe src="https://www.youtube.com/embed/dcpcwARBMJ4">
 
-      </iframe>
-    </div> -->
   <div class="info-container">
     <div class="image-container">
       <div *ngIf="getMovieDetailResult.poster_path">
@@ -35,7 +31,7 @@
         <div class="data-con">
           <div class="genre" *ngFor="let item of getMovieDetailResult.genres">
             <span class="fa fa-dot-circle-o"></span>
-            <span>{{item.name | uppercase}}</span>
+            <span>{{item.name}}</span>
           </div>
         </div>
       </div>
@@ -45,19 +41,14 @@
         <span>{{getMovieDetailResult.overview}}</span>
       </div>
 
-      <div class="cast-container">
-        <h5>THE CAST</h5>
-        <div class="row">
-          <div *ngFor="let t of getMovieCastResult.cast">
-            <img src="https://image.tmdb.org/t/p/original{{ t.profil_path }}">
-          </div>
+      <div class="more-container">
+        <h5>LEARN MORE</h5>
+        <div class="button-container">
+          <button (click)="goWebsite(getMovieDetailResult.homepage)">Website <span class="fa fa-link"></span></button>
+          <button (click)="goIMDB(getMovieDetailResult.imdb_id)">IMDB <span class="fa fa-film"></span></button>
+          <button (click)="goTrailer(getMovieVideoResult)">Trailer <span class="fa fa-play-circle-o"></span></button>
+          <button class="back-button"><span class="fa fa-arrow-circle-left" (click)="goBack()"> Back</span></button>
         </div>
       </div>
 
-      <div class="button-container">
-        <button>Website <span class="fa fa-link"></span></button>
-        <button>IMDB <span class="fa fa-film"></span></button>
-        <button>Trailer <span class="fa fa-play-circle-o"></span></button>
-        <button><span class="fa fa-arrow-circle-left"> Back</span></button>
-      </div>
     </div>

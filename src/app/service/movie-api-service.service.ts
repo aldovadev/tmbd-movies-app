@@ -17,6 +17,11 @@ export class MovieApiService {
     return this.http.get(`${this.baseurl}/trending/all/day?api_key=${this.apikey}`);
   }
 
+  // homemovieapidata
+  homeMovieApiData(page: number): Observable<any> {
+    return this.http.get(`${this.baseurl}/movie/now_playing?api_key=${this.apikey}&page=${page}`);
+  }
+
   // categorymovieapidata
   categoryMovieApiData(page: number, category: string): Observable<any> {
     return this.http.get(`${this.baseurl}/movie/${category}?api_key=${this.apikey}&page=${page}`);
@@ -28,7 +33,6 @@ export class MovieApiService {
 
   // searchmovive
   getSearchMovie(data: any): Observable<any> {
-    console.log(data, 'movie#');
     return this.http.get(`${this.baseurl}/search/movie?api_key=${this.apikey}&query=${data.movieName}`);
   }
 
@@ -40,10 +44,5 @@ export class MovieApiService {
   // getMovieVideo
   getMovieVideo(data: any): Observable<any> {
     return this.http.get(`${this.baseurl}/movie/${data}/videos?api_key=${this.apikey}`)
-  }
-
-  // getMovieCast
-  getMovieCast(data: any): Observable<any> {
-    return this.http.get(`${this.baseurl}/movie/${data}/credits?api_key=${this.apikey}`)
   }
 }

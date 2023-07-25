@@ -19,6 +19,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@angular/service-worker": "^16.1.0",
     "@ng-bootstrap/ng-bootstrap": "^15.1.0",
     "ngx-infinite-scroll": "^16.0.0",
     "ngx-spinner": "^16.0.2",

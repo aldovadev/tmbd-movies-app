@@ -15,8 +15,11 @@
     margin-top: 50px;
 
     .image-container {
+      width: 390px;
+      height: 580px;
       padding: 30px 20px;
       box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      margin-bottom: 30px;
       img {
         width: 350px;
         height: auto;
@@ -24,13 +27,16 @@
     }
 
     .detail-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       max-width: 600px;
       padding: 0px 30px;
-      padding-top: 30px;
 
       h3 {
+        width: 100%;
         font-weight: bold;
-        text-align: justify;
+        color: #d90166;
       }
       h6 {
         font-weight: lighter;
@@ -99,31 +105,68 @@
 
       .cast-container {
         width: 100%;
-        text-align: justify;
         margin-top: 30px;
-        img {
-          height: 40px;
+        row {
+          display: flex;
+          flex-direction: column;
+          img {
+            width: auto;
+            height: 200px;
+          }
         }
       }
 
-      .button-container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        width: 100%;
-        margin-top: 30px;
-      }
-    }
-  }
+      .more-container {
+        .button-container {
+          display: flex;
+          flex-direction: row;
+          justify-content: flex-start;
+          align-items: center;
+          flex-wrap: wrap;
+          width: 100%;
+          margin-bottom: 20px;
 
-  .video-container {
-    display: grid;
-    place-items: center;
-    iframe {
-      width: 100%;
-      height: 500px;
+          button {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            border: none;
+            height: 40px;
+            width: 120px;
+            font-size: 15px;
+            background-color: #000;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 0px 20px;
+            margin: 20px 0px;
+            margin-right: 20px;
+          }
+          button:hover {
+            background-color: #d90166;
+            color: #fbfbfb;
+            transition: 0.5s;
+          }
+
+          .back-button {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            border: none;
+            height: 40px;
+            width: 120px;
+            font-size: 15px;
+            background-color: teal;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+            padding: 0px 20px;
+            margin: 20px 0px;
+          }
+        }
+      }
     }
   }
 }

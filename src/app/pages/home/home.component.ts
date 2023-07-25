@@ -65,7 +65,7 @@ export class HomeComponent implements OnInit {
 
     this.currentPage++;
 
-    this.service.categoryMovieApiData(this.currentPage, 'upcoming').subscribe({
+    this.service.homeMovieApiData(this.currentPage).subscribe({
       next: (result) => {
         this.upcomingMovieResult = [...this.upcomingMovieResult, ...result.results];
       }

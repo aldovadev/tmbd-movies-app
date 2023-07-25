@@ -1,16 +1,23 @@
 import { TestBed } from '@angular/core/testing';
+import { HttpClientModule } from '@angular/common/http';
+import { MovieApiService } from './movie-api-service.service';
 
-import { MovieApiServiceService } from './movie-api-service.service';
-
-describe('MovieApiServiceService', () => {
-  let service: MovieApiServiceService;
+describe('MovieApiService', () => {
+  let service: MovieApiService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(MovieApiServiceService);
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientModule, // Add HttpClientModule to the imports of TestBed configuration
+      ],
+      providers: [MovieApiService],
+    });
+    service = TestBed.inject(MovieApiService);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 });
+
+

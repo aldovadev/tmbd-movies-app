@@ -40,8 +40,9 @@
             </div>
           </div>
         </ng-container>
-        <div style="display: grid; place-items: center; width: 100vw; height: 60vh;" *ngIf="favorites.length === 0">
-          <h2>FAVORITES MOVIES EMPTY</h2>
+        <div style="display: grid; place-items: center; width: 100vw; height: 60vh;"
+          *ngIf="favorites.length === 0 && getParamId === 'favorites'">
+          <h2>FAVORITES MOVIE IS EMPTY</h2>
         </div>
         <div *ngIf="hasMoreData" infinite-scroll [infiniteScrollDistance]="scrollDistance"
           [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">

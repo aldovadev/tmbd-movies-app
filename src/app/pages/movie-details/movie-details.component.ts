@@ -2,25 +2,47 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiService } from 'src/app/service/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
-
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
   styleUrls: ['./movie-details.component.scss']
 })
 export class MovieDetailsComponent implements OnInit {
+  constructor(
+    private service: MovieApiService,
+    private router: ActivatedRoute,
+    private title: Title,
+    private meta: Meta,
+    private location: Location,
+    private Router: Router
+  ) { }
 
-
-  constructor(private service: MovieApiService, private router: ActivatedRoute, private title: Title, private meta: Meta) { }
   getMovieDetailResult: any;
   getMovieVideoResult: any;
   getMovieCastResult: any;
-  ngOnInit(): void {
+
+  ngOnInit() {
     let getParamId = this.router.snapshot.paramMap.get('id');
 
     this.getMovie(getParamId);
     this.getVideo(getParamId);
-    this.getMovieCast(getParamId);
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+  goWebsite(link: string): void {
+    window.open(link, '_blank');
+  }
+  goTrailer(link: string): void {
+    const youtubeUrl = `https://youtu.be/${link}`;
+    window.open(youtubeUrl, '_blank');
+  }
+  goIMDB(link: string): void {
+    const imdbUrl = `https://www.imdb.com/title/${link}`;
+    window.open(imdbUrl, '_blank');
   }
 
   getFilledStars(rating: any, index: number): boolean {
@@ -69,14 +91,7 @@ export class MovieDetailsComponent implements OnInit {
           this.getMovieVideoResult = element.key;
         }
       });
-
     });
   }
 
-  getMovieCast(id: any) {
-    this.service.getMovieCast(id).subscribe((result) => {
-      console.log(result, 'movieCast#');
-      this.getMovieCastResult = result.cast;
-    });
-  }
 }
