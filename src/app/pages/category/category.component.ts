@@ -22,7 +22,7 @@ export class CategoryComponent implements OnInit {
   getParamId: any
 
   hasMoreData = true;
-  currentPage = 1;
+  currentPage = 0;
 
   scrollDistance = 1;
   scrollUpDistance = 1;
@@ -32,7 +32,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.router.paramMap.subscribe((params) => {
       this.getParamId = params.get('id');
-      this.currentPage = 1;
+      this.currentPage = 0;
       this.movieResult = []
       this.loadMoreMovies()
       if (this.getParamId === 'favorites') {

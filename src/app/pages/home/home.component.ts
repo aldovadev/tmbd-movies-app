@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
 
 
   hasMoreData = true;
-  currentPage = 1;
+  currentPage = 0;
 
   scrollDistance = 1;
   scrollUpDistance = 1;
