@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MovieApiService } from 'src/app/service/movie-api-service.service';
+import { MovieApiService } from 'src/app/service/movie/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieApiService } from 'src/app/service/movie-api-service.service';
+import { MovieApiService } from 'src/app/service/movie/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 
@@ -80,7 +80,7 @@ export class HomeComponent implements OnInit {
 
   getHalfStars(rating: any, index: number): boolean {
     const value = rating - (2 * index);
-    const star = value > 1 && value < 2;
+    const star = value >= 1 && value < 2;
     return star;
   }
 
