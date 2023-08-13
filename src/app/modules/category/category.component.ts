@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiService } from 'src/app/services/movie/movie-api-service.service';
+import { StarService } from 'src/app/services/star/star.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
@@ -10,7 +11,8 @@ import { Title } from '@angular/platform-browser';
 })
 export class CategoryComponent implements OnInit {
   constructor(
-    private service: MovieApiService,
+    private movieService: MovieApiService,
+    public starService: StarService,
     private router: ActivatedRoute,
     private title: Title) {
 
@@ -79,7 +81,7 @@ export class CategoryComponent implements OnInit {
   loadMoreMovies() {
     this.currentPage++;
     if (this.getParamId !== 'favorites') {
-      this.service.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
+      this.movieService.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
         next: (result) => {
           this.movieResult = [...this.movieResult, ...result.results];
         }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieApiService } from 'src/app/services/movie/movie-api-service.service';
+import { StarService } from 'src/app/services/star/star.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 
@@ -11,7 +12,8 @@ import { Title, Meta } from '@angular/platform-browser';
 export class HomeComponent implements OnInit {
 
   constructor(
-    private service: MovieApiService,
+    private movieService: MovieApiService,
+    public starService: StarService,
     private title: Title,
     private meta: Meta) {
     this.title.setTitle('Home - Aldova');
@@ -65,7 +67,7 @@ export class HomeComponent implements OnInit {
 
     this.currentPage++;
 
-    this.service.homeMovieApiData(this.currentPage).subscribe({
+    this.movieService.homeMovieApiData(this.currentPage).subscribe({
       next: (result) => {
         this.upcomingMovieResult = [...this.upcomingMovieResult, ...result.results];
       }
@@ -91,7 +93,7 @@ export class HomeComponent implements OnInit {
   }
 
   bannerData() {
-    this.service.bannerApiData().subscribe((result) => {
+    this.movieService.bannerApiData().subscribe((result) => {
       this.bannerResult = result.results;
     });
   }

@@ -14,10 +14,11 @@
       <div class="rating-container">
         <div class="rating-star">
           <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
-            <span *ngIf="getFilledStars(getMovieDetailResult.vote_average, _)" class="fa fa-star filled-star"></span>
-            <span *ngIf="getHalfStars(getMovieDetailResult.vote_average, _)"
+            <span *ngIf="starService.getFilledStars(getMovieDetailResult.vote_average, _)"
+              class="fa fa-star filled-star"></span>
+            <span *ngIf="starService.getHalfStars(getMovieDetailResult.vote_average, _)"
               class="fa fa-star-half-o filled-star"></span>
-            <span *ngIf="getEmptyStars(getMovieDetailResult.vote_average, _)" class="fa fa-star-o"></span>
+            <span *ngIf="starService.getEmptyStars(getMovieDetailResult.vote_average, _)" class="fa fa-star-o"></span>
           </ng-container>
         </div>
         <div class="vid-info">

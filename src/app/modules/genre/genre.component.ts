@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiService } from 'src/app/services/movie/movie-api-service.service';
+import { StarService } from 'src/app/services/star/star.service';
 import { Title } from '@angular/platform-browser';
 import { Genre } from 'src/app/models/genre.model';
-
 @Component({
   selector: 'app-genre',
   templateUrl: './genre.component.html',
@@ -11,7 +11,8 @@ import { Genre } from 'src/app/models/genre.model';
 })
 export class GenreComponent implements OnInit {
   constructor(
-    private service: MovieApiService,
+    private movieService: MovieApiService,
+    public starService: StarService,
     private router: ActivatedRoute,
     private title: Title) {
 
@@ -43,7 +44,7 @@ export class GenreComponent implements OnInit {
 
 
   fetchGenres(): void {
-    this.service.getMovieGenres().subscribe({
+    this.movieService.getMovieGenres().subscribe({
       next: (result) => {
         this.genres = result.genres
         this.genreName = this.getGenreName(this.getParamId)
@@ -91,28 +92,10 @@ export class GenreComponent implements OnInit {
 
     this.currentPage++;
 
-    this.service.genreMovieApiData(this.currentPage, this.getParamId).subscribe({
+    this.movieService.genreMovieApiData(this.currentPage, this.getParamId).subscribe({
       next: (result) => {
         this.movieResult = [...this.movieResult, ...result.results]
       },
     });
-  }
-
-  getFilledStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value >= 0
-    return star;
-  }
-
-  getHalfStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value >= 1 && value < 2;
-    return star;
-  }
-
-  getEmptyStars(rating: any, index: number): boolean {
-    const value = (2 * index) - rating;
-    const star = value >= 1;
-    return star;
   }
 }

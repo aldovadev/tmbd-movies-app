@@ -25,9 +25,9 @@
             </div>
             <div class="rating-star">
               <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
-                <span *ngIf="getFilledStars(t.vote_average, _)" class="fa fa-star filled-star"></span>
-                <span *ngIf="getHalfStars(t.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
-                <span *ngIf="getEmptyStars(t.vote_average, _)" class="fa fa-star-o"></span>
+                <span *ngIf="starService.getFilledStars(t.vote_average, _)" class="fa fa-star filled-star"></span>
+                <span *ngIf="starService.getHalfStars(t.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
+                <span *ngIf="starService.getEmptyStars(t.vote_average, _)" class="fa fa-star-o"></span>
               </ng-container>
             </div>
             <div class="control-container">
@@ -48,7 +48,6 @@
           [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">
           loading...
         </div>
-
       </div>
     </div>
   </div>

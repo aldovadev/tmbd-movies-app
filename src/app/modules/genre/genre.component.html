@@ -5,6 +5,7 @@
         <h3>GENRE :</h3>
         <h4> {{genreName}}</h4>
       </div>
+
       <div class="rowposter mt-3 p-2">
         <ng-container *ngFor="let t of movieResult">
           <div class="card-container">
@@ -25,9 +26,9 @@
             </div>
             <div class="rating-star">
               <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
-                <span *ngIf="getFilledStars(t.vote_average, _)" class="fa fa-star filled-star"></span>
-                <span *ngIf="getHalfStars(t.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
-                <span *ngIf="getEmptyStars(t.vote_average, _)" class="fa fa-star-o"></span>
+                <span *ngIf="starService.getFilledStars(t.vote_average, _)" class="fa fa-star filled-star"></span>
+                <span *ngIf="starService.getHalfStars(t.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
+                <span *ngIf="starService.getEmptyStars(t.vote_average, _)" class="fa fa-star-o"></span>
               </ng-container>
             </div>
             <div class="control-container">
@@ -40,12 +41,10 @@
             </div>
           </div>
         </ng-container>
-
         <div *ngIf="hasMoreData" infinite-scroll [infiniteScrollDistance]="scrollDistance"
           [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">
           Loading...
         </div>
-
       </div>
     </div>
   </div>

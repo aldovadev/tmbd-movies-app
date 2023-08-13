@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MovieApiService } from 'src/app/services/movie/movie-api-service.service';
+import { StarService } from 'src/app/services/star/star.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class MovieDetailsComponent implements OnInit {
   constructor(
-    private service: MovieApiService,
+    private movieService: MovieApiService,
+    public starService: StarService,
     private router: ActivatedRoute,
     private title: Title,
     private meta: Meta,
@@ -64,7 +66,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getMovie(id: any) {
-    this.service.getMovieDetails(id).subscribe(async (result) => {
+    this.movieService.getMovieDetails(id).subscribe(async (result) => {
       this.getMovieDetailResult = await result;
 
       // updatetags
@@ -83,7 +85,7 @@ export class MovieDetailsComponent implements OnInit {
   }
 
   getVideo(id: any) {
-    this.service.getMovieVideo(id).subscribe((result) => {
+    this.movieService.getMovieVideo(id).subscribe((result) => {
       result.results.forEach((element: any) => {
         if (element.type == "Trailer") {
           this.getMovieVideoResult = element.key;
