@@ -1,46 +1,42 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MovieApiService } from './services/movie/movie-api-service.service';
+import { Genre } from './models/genre.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  constructor(private router: Router) { }
+export class AppComponent implements OnInit {
 
-  genresMapping = [
-    { link: 'Action', value: 'Action' },
-    { link: 'Adventure', value: 'Adventure' },
-    { link: 'Animation', value: 'Animation' },
-    { link: 'Comedy', value: 'Comedy' },
-    { link: 'Crime', value: 'Crime' },
-    { link: 'Documentary', value: 'Documentary' },
-    { link: 'Drama', value: 'Drama' },
-    { link: 'Family', value: 'Family' },
-    { link: 'Fantasy', value: 'Fantasy' },
-    { link: 'History', value: 'History' },
-    { link: 'Horror', value: 'Horror' },
-    { link: 'Music', value: 'Music' },
-    { link: 'Mystery', value: 'Mystery' },
-    { link: 'Romance', value: 'Romance' },
-    { link: 'Science_Fiction', value: 'Science Fiction' },
-    { link: 'TV_Movie', value: 'TV Movie' },
-    { link: 'Thriller', value: 'Thriller' },
-    { link: 'War', value: 'War' },
-    { link: 'Western', value: 'Western' },
-  ];
+  constructor(private router: Router, private service: MovieApiService) {
+  }
 
-  title = 'aldova';
-  navbg: any = {
+  genres: Genre[] = []
+
+  navbg: object = {
     'background-color': '#fbfbfb88',
+    'box-shadow': 'rgba(0, 0, 0, 0) 0px 3px 8px',
   }
 
   inputValue: string = '';
+
+  ngOnInit(): void {
+    this.fetchGenres()
+  }
 
   search(): void {
     if (this.inputValue !== '') {
       this.router.navigate(['search/', this.inputValue]);
     }
+  }
+
+  fetchGenres(): void {
+    this.service.getMovieGenres().subscribe({
+      next: (result) => {
+        this.genres = result.genres
+      },
+    })
   }
 
   @HostListener('document:scroll') scrollover() {
@@ -52,6 +48,7 @@ export class AppComponent {
     } else {
       this.navbg = {
         'background-color': '#fbfbfb88',
+        'box-shadow': 'rgba(0, 0, 0, 0) 0px 3px 8px',
       }
     }
   }

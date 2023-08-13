@@ -55,4 +55,9 @@ export class MovieApiService {
     const headers = this.getHeaders();
     return this.http.get(`${this.baseurl}/movie/${data}/videos`, { headers });
   }
+
+  getMovieGenres(): Observable<any> {
+    const headers = this.getHeaders();
+    return this.http.get(`${this.baseurl}/genre/movie/list`, { headers });
+  }
 }

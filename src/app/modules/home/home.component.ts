@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MovieApiService } from 'src/app/service/movie/movie-api-service.service';
+import { MovieApiService } from 'src/app/services/movie/movie-api-service.service';
 import { Title, Meta } from '@angular/platform-browser';
 
 

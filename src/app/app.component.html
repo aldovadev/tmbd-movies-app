@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg fixed-top" [ngStyle]="navbg">
+<nav *ngIf="genres.length > 0" class="navbar navbar-expand-lg fixed-top" [ngStyle]="navbg">
   <div class="container-fluid">
     <a class="navbar-brand" routerLink="">
       <img src="../assets/logo.png" alt="logo">
@@ -33,19 +33,19 @@
             <div class="row">
               <div class="col">
                 <ul class="list-unstyled">
-                  <li *ngFor="let genre of genresMapping.slice(0, genresMapping.length / 2 + 1)">
-                    <a class="dropdown-item" [routerLink]="'genre/' + genre.link" routerLinkActive="active">{{
-                      genre.value
+                  <li *ngFor="let genre of genres.slice(0, genres.length / 2 + 1)">
+                    <a class="dropdown-item" [routerLink]="'genre/' + genre.id" routerLinkActive="active">{{
+                      genre.name
                       }}</a>
                   </li>
                 </ul>
               </div>
               <div class="col">
                 <ul class="list-unstyled">
-                  <li *ngFor="let genre of genresMapping.slice(genresMapping.length / 2)">
-                    <a *ngIf="genre.value!=='History'" class="dropdown-item" [routerLink]="'genre/' + genre.link"
+                  <li *ngFor="let genre of genres.slice(genres.length / 2)">
+                    <a *ngIf="genre.name!=='History'" class="dropdown-item" [routerLink]="'genre/' + genre.id"
                       routerLinkActive="active">{{
-                      genre.value }}</a>
+                      genre.name }}</a>
                   </li>
                 </ul>
               </div>
