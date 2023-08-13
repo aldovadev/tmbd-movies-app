@@ -1,9 +1,9 @@
 <div class="contain">
 
-  <div class="info-container">
+  <div *ngIf="getMovieDetailResult" class="info-container">
     <div class="image-container">
-      <div *ngIf="getMovieDetailResult.poster_path">
-        <img src="https://image.tmdb.org/t/p/original/{{ getMovieDetailResult.poster_path }}">
+      <div *ngIf="getMovieDetailResult?.poster_path">
+        <img src="https://image.tmdb.org/t/p/original/{{ getMovieDetailResult!.poster_path }}">
       </div>
     </div>
 
@@ -30,7 +30,7 @@
       <div class="genre-container">
         <h5>THE GENRES</h5>
         <div class="data-con">
-          <div class="genre" *ngFor="let item of getMovieDetailResult.genres">
+          <div class="genre" *ngFor="let item of getMovieDetailResult?.genres">
             <span class="fa fa-dot-circle-o"></span>
             <span>{{item.name}}</span>
           </div>

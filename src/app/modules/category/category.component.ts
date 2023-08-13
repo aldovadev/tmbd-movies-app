@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MovieApiService } from 'src/app/services/movie/movie-api-service.service';
-import { StarService } from 'src/app/services/star/star.service';
-import { Title } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core'
+import { ActivatedRoute } from '@angular/router'
+import { MovieApiService } from 'src/app/services/movie/movie-api-service.service'
+import { StarService } from 'src/app/services/star/star.service'
+import { Title } from '@angular/platform-browser'
+import { Card } from 'src/app/models/card.model'
 
 @Component({
   selector: 'app-category',
@@ -18,47 +19,50 @@ export class CategoryComponent implements OnInit {
 
   }
 
-  favorites: any[] = [];
+  favorites: Card[] = []
 
-  movieResult: any = []
-  getParamId: any
+  movieResult: Card[] = []
+  getParamId: string = ''
 
-  hasMoreData = true;
-  currentPage = 0;
+  hasMoreData: boolean = true
+  currentPage: number = 0
 
-  scrollDistance = 1;
-  scrollUpDistance = 1;
-  private key = 'favoritesMovies';
-  tooltipText: string = 'Add to Favorites';
+  scrollDistance: number = 2
+  scrollUpDistance: number = 2
+  private key = 'favoritesMovies'
+  tooltipText: string = 'Add to Favorites'
 
   ngOnInit(): void {
     this.router.paramMap.subscribe((params) => {
-      this.getParamId = params.get('id');
-      this.currentPage = 0;
-      this.movieResult = []
-      this.loadMoreMovies()
-      if (this.getParamId === 'favorites') {
-        let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
-        this.favorites = storedData
-        this.movieResult = storedData
-        this.hasMoreData = false
-      } else this.hasMoreData = true
-    });
+      const id = params.get('id')
+      if (id !== null) {
+        this.getParamId = id
+        this.currentPage = 0
+        this.movieResult = []
+        this.loadMoreMovies()
+        if (this.getParamId === 'favorites') {
+          let storedData = [] = JSON.parse(localStorage.getItem(this.key) || '[]')
+          this.favorites = storedData
+          this.movieResult = storedData
+          this.hasMoreData = false
+        } else this.hasMoreData = true
+      }
+    })
 
-    this.title.setTitle(`Category | ${this.getParamId}`);
+    this.title.setTitle(`Category | ${this.getParamId}`)
   }
 
-  saveToFavorites(data: any) {
-    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+  saveToFavorites(data: Card) {
+    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
 
     if (!storedData.some((item) => item.id === data.id)) {
-      storedData.push(data);
-      localStorage.setItem(this.key, JSON.stringify(storedData));
-      this.favorites = storedData;
+      storedData.push(data)
+      localStorage.setItem(this.key, JSON.stringify(storedData))
+      this.favorites = storedData
     } else {
-      storedData = storedData.filter((item) => item.id !== data.id);
-      localStorage.setItem(this.key, JSON.stringify(storedData));
-      this.favorites = storedData;
+      storedData = storedData.filter((item) => item.id !== data.id)
+      localStorage.setItem(this.key, JSON.stringify(storedData))
+      this.favorites = storedData
     }
 
     if (this.getParamId === 'favorites') {
@@ -67,54 +71,39 @@ export class CategoryComponent implements OnInit {
   }
 
 
-  isInFavorites(data: any): boolean {
-    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+  isInFavorites(data: Card): boolean {
+    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
     if (storedData.some((item) => item.id === data.id)) {
-      this.tooltipText = 'Remove from Favorites';
-      return true;
+      this.tooltipText = 'Remove from Favorites'
+      return true
     } else {
-      this.tooltipText = 'Add to Favorites';
-      return false;
+      this.tooltipText = 'Add to Favorites'
+      return false
     }
   }
 
   loadMoreMovies() {
-    this.currentPage++;
+    if (!this.hasMoreData) {
+      return;
+    }
+    this.currentPage++
     if (this.getParamId !== 'favorites') {
       this.movieService.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
         next: (result) => {
-          this.movieResult = [...this.movieResult, ...result.results];
+          this.movieResult = [...this.movieResult, ...result]
         }
-      });
+      })
     }
   }
 
   getCategory(): string {
-    var data: any
     switch (this.getParamId) {
-      case 'favorites': data = 'Favorites'; break;
-      case 'upcoming': data = 'Upcoming'; break;
-      case 'top_rated': data = 'Top Rated'; break;
-      case 'popular': data = 'Popular'; break;
+      case 'favorites': return 'Favorites';
+      case 'upcoming': return 'Upcoming';
+      case 'top_rated': return 'Top Rated';
+      case 'popular': return 'Popular';
+      default: return '';
     }
-    return data;
   }
 
-  getFilledStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value >= 0
-    return star;
-  }
-
-  getHalfStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value > 1 && value < 2;
-    return star;
-  }
-
-  getEmptyStars(rating: any, index: number): boolean {
-    const value = (2 * index) - rating;
-    const star = value >= 1;
-    return star;
-  }
 }

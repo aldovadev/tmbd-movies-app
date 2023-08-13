@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { MovieApiService } from 'src/app/services/movie/movie-api-service.service';
-import { StarService } from 'src/app/services/star/star.service';
-import { Title, Meta } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core'
+import { MovieApiService } from 'src/app/services/movie/movie-api-service.service'
+import { StarService } from 'src/app/services/star/star.service'
+import { Title, Meta } from '@angular/platform-browser'
+import { Banner } from 'src/app/models/banner.model'
+import { Card } from 'src/app/models/card.model'
 
 
 @Component({
@@ -16,85 +18,70 @@ export class HomeComponent implements OnInit {
     public starService: StarService,
     private title: Title,
     private meta: Meta) {
-    this.title.setTitle('Home - Aldova');
-    this.meta.updateTag({ name: 'description', content: 'watch online movies' });
+    this.title.setTitle('Home - Aldova')
+    this.meta.updateTag({ name: 'description', content: 'watch online movies' })
   }
 
-  bannerResult: any = [];
-  upcomingMovieResult: any = [];
+  bannerResult: Banner[] = []
+  upcomingMovieResult: Card[] = []
 
 
-  hasMoreData = true;
-  currentPage = 0;
+  hasMoreData: boolean = true
+  currentPage: number = 0
 
-  scrollDistance = 1;
-  scrollUpDistance = 1;
-  private key = 'favoritesMovies';
-  tooltipText: string = 'Add to Favorites';
+  scrollDistance: number = 2
+  scrollUpDistance: number = 2
+  key: string = 'favoritesMovies'
+  tooltipText: string = 'Add to Favorites'
 
   ngOnInit(): void {
-    this.bannerData();
+    this.bannerData()
   }
 
-  saveToFavorites(data: any) {
-    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+  saveToFavorites(data: Card) {
+    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
 
     if (!storedData.some((item) => item.id === data.id)) {
-      storedData.push(data);
-      localStorage.setItem(this.key, JSON.stringify(storedData));
+      storedData.push(data)
+      localStorage.setItem(this.key, JSON.stringify(storedData))
     } else {
-      storedData = storedData.filter((item) => item.id !== data.id);
-      localStorage.setItem(this.key, JSON.stringify(storedData));
+      storedData = storedData.filter((item) => item.id !== data.id)
+      localStorage.setItem(this.key, JSON.stringify(storedData))
     }
   }
 
 
-  isInFavorites(data: any): boolean {
-    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+  isInFavorites(data: Card): boolean {
+    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
     if (storedData.some((item) => item.id === data.id)) {
-      this.tooltipText = 'Remove from Favorites';
-      return true;
+      this.tooltipText = 'Remove from Favorites'
+      return true
     } else {
-      this.tooltipText = 'Add to Favorites';
-      return false;
+      this.tooltipText = 'Add to Favorites'
+      return false
     }
   }
 
   loadMoreMovies() {
     if (!this.hasMoreData) {
-      return;
+      return
     }
 
-    this.currentPage++;
+    this.currentPage++
 
     this.movieService.homeMovieApiData(this.currentPage).subscribe({
       next: (result) => {
-        this.upcomingMovieResult = [...this.upcomingMovieResult, ...result.results];
+        this.upcomingMovieResult = [...this.upcomingMovieResult, ...result]
       }
-    });
-  }
-
-  getFilledStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value >= 0
-    return star;
-  }
-
-  getHalfStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value >= 1 && value < 2;
-    return star;
-  }
-
-  getEmptyStars(rating: any, index: number): boolean {
-    const value = (2 * index) - rating;
-    const star = value >= 1;
-    return star;
+    })
   }
 
   bannerData() {
-    this.movieService.bannerApiData().subscribe((result) => {
-      this.bannerResult = result.results;
-    });
+    this.movieService.bannerApiData().subscribe({
+      next: (result) => {
+        this.bannerResult = [...this.bannerResult, ...result]
+      }
+    })
   }
 }
+

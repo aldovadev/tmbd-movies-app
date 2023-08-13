@@ -18,6 +18,7 @@ import { CategoryComponent } from './modules/category/category.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { CapitalizeWordsPipe } from './shared/pipes/capitalize-word.pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     SearchComponent,
     MovieDetailsComponent,
     GenreComponent,
-    CategoryComponent
+    CategoryComponent,
+    CapitalizeWordsPipe
   ],
   imports: [
     BrowserModule,

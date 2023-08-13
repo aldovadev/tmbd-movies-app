@@ -1,19 +1,17 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieApiService } from './services/movie/movie-api-service.service';
-import { Genre } from './models/genre.model';
+import { Genre, GenreResponse } from './models/genre.model';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
   constructor(private router: Router, private service: MovieApiService) {
   }
 
   genres: Genre[] = []
-
   navbg: object = {
     'background-color': '#fbfbfb88',
     'box-shadow': 'rgba(0, 0, 0, 0) 0px 3px 8px',

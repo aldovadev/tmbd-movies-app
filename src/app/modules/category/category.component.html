@@ -3,13 +3,14 @@
     <div class="row">
       <div class="desc-container">
         <h3>CATEGORY :</h3>
-        <h4> {{getCategory()}}</h4>
+        <h4> {{getParamId.replace('_',' ') | capitalizeWords}}</h4>
       </div>
+
       <div class="rowposter mt-3 p-2">
         <ng-container div class="card-container" *ngFor="let t of movieResult">
           <div class="card-container">
             <ng-container *ngIf="t.poster_path; else noPoster">
-              <img src="https://image.tmdb.org/t/p/original{{ t.poster_path }}" class="rowimg largeposter" alt="..."
+              <img src="https://image.tmdb.org/t/p/w342{{ t.poster_path }}" class="rowimg largeposter" alt="..."
                 [routerLink]="['/movie', t.id]">
             </ng-container>
             <ng-template #noPoster>

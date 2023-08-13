@@ -10,41 +10,44 @@
     </div>
   </form>
 
-
-  <div class="rowposter mt-3 p-2">
-    <ng-container *ngFor="let t of searchResult">
-      <div class="card-container">
-        <ng-container *ngIf="t.poster_path; else noPoster">
-          <img src="https://image.tmdb.org/t/p/original{{ t.poster_path }}" class="rowimg largeposter" alt="..."
-            [routerLink]="['/movie', t.id]">
-        </ng-container>
-        <ng-template #noPoster>
-          <div class="no-poster">
-            <h3>No Poster Available</h3>
-            <h3>404</h3>
+  <div class="contain mt-3 mb-5 p-4">
+    <div class="row">
+      <div class="rowposter mt-3 p-2">
+        <ng-container *ngFor="let t of searchResult">
+          <div class="card-container">
+            <ng-container *ngIf="t.poster_path; else noPoster">
+              <img src="https://image.tmdb.org/t/p/w342{{ t.poster_path }}" class="rowimg largeposter" alt="..."
+                [routerLink]="['/movie', t.id]">
+            </ng-container>
+            <ng-template #noPoster>
+              <div class="no-poster">
+                <h3>No Poster Available</h3>
+                <h3>404</h3>
+              </div>
+            </ng-template>
+            <div class="title-container">
+              <a [routerLink]="['/movie', t.id]">
+                {{t.title}}
+              </a>
+            </div>
+            <div class="rating-star">
+              <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
+                <span *ngIf="starService.getFilledStars(t.vote_average, _)" class="fa fa-star filled-star"></span>
+                <span *ngIf="starService.getHalfStars(t.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
+                <span *ngIf="starService.getEmptyStars(t.vote_average, _)" class="fa fa-star-o"></span>
+              </ng-container>
+            </div>
+            <div class="control-container">
+              <h6>Rating: {{ t.vote_average }}</h6>
+              <button class="fav-button" (click)="saveToFavorites(t)" [ngClass]="{ 'favorite': isInFavorites(t) }">
+                <span class="fa" [ngClass]="{ 'fa-heart': isInFavorites(t), 'fa-heart-o': !isInFavorites(t) }"></span>
+                <span>Favorites</span>
+                <span class="tooltiptext">{{tooltipText}}</span>
+              </button>
+            </div>
           </div>
-        </ng-template>
-        <div class="title-container">
-          <a [routerLink]="['/movie', t.id]">
-            {{t.title}}
-          </a>
-        </div>
-        <div class="rating-star">
-          <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
-            <span *ngIf="starService.getFilledStars(t.vote_average, _)" class="fa fa-star filled-star"></span>
-            <span *ngIf="starService.getHalfStars(t.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
-            <span *ngIf="starService.getEmptyStars(t.vote_average, _)" class="fa fa-star-o"></span>
-          </ng-container>
-        </div>
-        <div class="control-container">
-          <h6>Rating: {{ t.vote_average }}</h6>
-          <button class="fav-button" (click)="saveToFavorites(t)" [ngClass]="{ 'favorite': isInFavorites(t) }">
-            <span class="fa" [ngClass]="{ 'fa-heart': isInFavorites(t), 'fa-heart-o': !isInFavorites(t) }"></span>
-            <span>Favorites</span>
-            <span class="tooltiptext">{{tooltipText}}</span>
-          </button>
-        </div>
+        </ng-container>
       </div>
-    </ng-container>
+    </div>
   </div>
 </div>

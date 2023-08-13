@@ -54,7 +54,8 @@
         </li>
         <div class="wrap">
           <div class="search">
-            <input type="text" class="searchTerm" placeholder="Search movies?" [(ngModel)]="inputValue" />
+            <input type="text" class="searchTerm" placeholder="Search movies?" [(ngModel)]="inputValue"
+              (keyup.enter)="search()" />
             <button type="submit" class="searchButton" (click)="search()">
               <i class="fa fa-search"></i>
             </button>

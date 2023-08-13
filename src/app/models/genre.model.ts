@@ -1,9 +1,8 @@
-export class Genre {
+export interface Genre {
   id: number;
   name: string;
+}
 
-  constructor() {
-    this.id = 0;
-    this.name = '';
-  }
+export interface GenreResponse {
+  genres: Genre[]
 }

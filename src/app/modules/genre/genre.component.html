@@ -10,7 +10,7 @@
         <ng-container *ngFor="let t of movieResult">
           <div class="card-container">
             <ng-container *ngIf="t.poster_path; else noPoster">
-              <img src="https://image.tmdb.org/t/p/original{{ t.poster_path }}" class="rowimg largeposter" alt="..."
+              <img src="https://image.tmdb.org/t/p/w342{{ t.poster_path }}" class="rowimg largeposter" alt="..."
                 [routerLink]="['/movie', t.id]">
             </ng-container>
             <ng-template #noPoster>

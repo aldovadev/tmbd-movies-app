@@ -5,6 +5,7 @@ import { StarService } from 'src/app/services/star/star.service';
 import { Title, Meta } from '@angular/platform-browser';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
+import { Detail } from 'src/app/models/detail.model';
 @Component({
   selector: 'app-movie-details',
   templateUrl: './movie-details.component.html',
@@ -21,15 +22,17 @@ export class MovieDetailsComponent implements OnInit {
     private Router: Router
   ) { }
 
-  getMovieDetailResult: any;
-  getMovieVideoResult: any;
-  getMovieCastResult: any;
+  getMovieDetailResult: Detail | null = null
+  getMovieVideoResult: string = ''
+  getParamId: string = ''
 
   ngOnInit() {
-    let getParamId = this.router.snapshot.paramMap.get('id');
-
-    this.getMovie(getParamId);
-    this.getVideo(getParamId);
+    const id = this.router.snapshot.paramMap.get('id')
+    if (id !== null) {
+      this.getParamId = id
+      this.getMovieDetail(this.getParamId);
+      this.getMovieVideo(this.getParamId);
+    }
   }
 
   goBack(): void {
@@ -47,51 +50,30 @@ export class MovieDetailsComponent implements OnInit {
     window.open(imdbUrl, '_blank');
   }
 
-  getFilledStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value >= 0
-    return star;
-  }
+  getMovieDetail(id: string) {
+    this.movieService.getMovieDetail(id).subscribe({
+      next: (result) => {
+        this.getMovieDetailResult = result
 
-  getHalfStars(rating: any, index: number): boolean {
-    const value = rating - (2 * index);
-    const star = value > 1 && value < 2;
-    return star;
-  }
+        // updatetags
+        this.title.setTitle(`${this.getMovieDetailResult.title} | ${this.getMovieDetailResult.tagline}`);
+        this.meta.updateTag({ name: 'title', content: this.getMovieDetailResult.title });
+        this.meta.updateTag({ name: 'description', content: this.getMovieDetailResult.overview });
 
-  getEmptyStars(rating: any, index: number): boolean {
-    const value = (2 * index) - rating;
-    const star = value >= 1;
-    return star;
-  }
-
-  getMovie(id: any) {
-    this.movieService.getMovieDetails(id).subscribe(async (result) => {
-      this.getMovieDetailResult = await result;
-
-      // updatetags
-      this.title.setTitle(`${this.getMovieDetailResult.original_title} | ${this.getMovieDetailResult.tagline}`);
-      this.meta.updateTag({ name: 'title', content: this.getMovieDetailResult.original_title });
-      this.meta.updateTag({ name: 'description', content: this.getMovieDetailResult.overview });
-
-      // facebook
-      this.meta.updateTag({ property: 'og:type', content: "website" });
-      this.meta.updateTag({ property: 'og:url', content: `` });
-      this.meta.updateTag({ property: 'og:title', content: this.getMovieDetailResult.original_title });
-      this.meta.updateTag({ property: 'og:description', content: this.getMovieDetailResult.overview });
-      this.meta.updateTag({ property: 'og:image', content: `https://image.tmdb.org/t/p/original/${this.getMovieDetailResult.backdrop_path}` });
-
+        // facebook
+        this.meta.updateTag({ property: 'og:type', content: "website" });
+        this.meta.updateTag({ property: 'og:url', content: '' });
+        this.meta.updateTag({ property: 'og:title', content: this.getMovieDetailResult.title });
+        this.meta.updateTag({ property: 'og:description', content: this.getMovieDetailResult.overview });
+      }
     });
   }
 
-  getVideo(id: any) {
-    this.movieService.getMovieVideo(id).subscribe((result) => {
-      result.results.forEach((element: any) => {
-        if (element.type == "Trailer") {
-          this.getMovieVideoResult = element.key;
-        }
-      });
+  getMovieVideo(id: string) {
+    this.movieService.getMovieVideo(id).subscribe({
+      next: (result) => {
+        this.getMovieVideoResult = result.results[0].key
+      }
     });
   }
-
 }

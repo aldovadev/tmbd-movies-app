@@ -5,19 +5,19 @@ import { Injectable } from '@angular/core';
 })
 export class StarService {
 
-  getFilledStars(rating: any, index: number): boolean {
+  getFilledStars(rating: number, index: number): boolean {
     const value = rating - (2 * index);
     const star = value >= 0;
     return star;
   }
 
-  getHalfStars(rating: any, index: number): boolean {
+  getHalfStars(rating: number, index: number): boolean {
     const value = rating - (2 * index);
     const star = value >= 1 && value < 2;
     return star;
   }
 
-  getEmptyStars(rating: any, index: number): boolean {
+  getEmptyStars(rating: number, index: number): boolean {
     const value = (2 * index) - rating;
     const star = value >= 1;
     return star;

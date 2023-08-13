@@ -4,6 +4,7 @@ import { MovieApiService } from 'src/app/services/movie/movie-api-service.servic
 import { StarService } from 'src/app/services/star/star.service';
 import { Title } from '@angular/platform-browser';
 import { Genre } from 'src/app/models/genre.model';
+import { Card } from 'src/app/models/card.model';
 @Component({
   selector: 'app-genre',
   templateUrl: './genre.component.html',
@@ -18,51 +19,52 @@ export class GenreComponent implements OnInit {
 
   }
 
-  movieResult: any = []
-  getParamId: any
+  movieResult: Card[] = []
+  getParamId: string = ''
   genres: Genre[] = []
   genreName: string = ''
 
   hasMoreData: boolean = true;
   currentPage: number = 0;
 
-  scrollDistance: number = 1;
-  scrollUpDistance: number = 1;
+  scrollDistance: number = 2;
+  scrollUpDistance: number = 2;
   key: string = 'favoritesMovies';
   tooltipText: string = 'Add to Favorites';
 
   ngOnInit(): void {
-
     this.router.paramMap.subscribe((params) => {
-      this.getParamId = params.get('id');
-      this.currentPage = 0;
-      this.movieResult = []
-      this.fetchGenres()
-      this.loadMoreMovies()
+      const id = params.get('id');
+      if (id !== null) {
+        this.getParamId = id;
+        this.currentPage = 0;
+        this.movieResult = []
+        this.fetchGenres()
+        this.loadMoreMovies()
+      }
     });
   }
-
 
   fetchGenres(): void {
     this.movieService.getMovieGenres().subscribe({
       next: (result) => {
-        this.genres = result.genres
-        this.genreName = this.getGenreName(this.getParamId)
+        // this.genres = [...this.genres, ...result]
+        this.getGenreName(this.getParamId)
         this.title.setTitle(`Category | ${this.genreName}`);
       },
     })
   }
 
-  getGenreName(params: any): any {
+  getGenreName(params: string): void {
     for (let genre of this.genres) {
       if (genre.id.toString() === params) {
-        return genre.name
+        this.genreName = genre.name
       }
     }
   }
 
-  saveToFavorites(data: any) {
-    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+  saveToFavorites(data: Card) {
+    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]');
 
     if (!storedData.some((item) => item.id === data.id)) {
       storedData.push(data);
@@ -73,8 +75,8 @@ export class GenreComponent implements OnInit {
     }
   }
 
-  isInFavorites(data: any): boolean {
-    let storedData: any[] = JSON.parse(localStorage.getItem(this.key) || '[]');
+  isInFavorites(data: Card): boolean {
+    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]');
     if (storedData.some((item) => item.id === data.id)) {
       this.tooltipText = 'Remove from Favorites'
       return true
@@ -94,8 +96,8 @@ export class GenreComponent implements OnInit {
 
     this.movieService.genreMovieApiData(this.currentPage, this.getParamId).subscribe({
       next: (result) => {
-        this.movieResult = [...this.movieResult, ...result.results]
-      },
+        this.movieResult = [...this.movieResult, ...result]
+      }
     });
   }
 }
