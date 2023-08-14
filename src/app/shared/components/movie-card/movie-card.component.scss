@@ -18,9 +18,9 @@
 
 .rowposter {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-between;
   justify-items: center;
 
   .card-container {
@@ -28,6 +28,7 @@
     flex-direction: column;
     justify-content: space-between;
     width: 320px;
+    height: 100%;
     margin: 20px 10px;
     transition: 0.4s;
 

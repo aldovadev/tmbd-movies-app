@@ -25,7 +25,7 @@ export class CategoryComponent implements OnInit {
   getParamId: string = ''
 
   hasMoreData: boolean = true
-  currentPage: number = 0
+  currentPage: number = 1
 
   scrollDistance: number = 2
   scrollUpDistance: number = 2
@@ -37,9 +37,7 @@ export class CategoryComponent implements OnInit {
       const id = params.get('id')
       if (id !== null) {
         this.getParamId = id
-        this.currentPage = 0
         this.movieResult = []
-        this.loadMoreMovies()
         if (this.getParamId === 'favorites') {
           let storedData = [] = JSON.parse(localStorage.getItem(this.key) || '[]')
           this.favorites = storedData
@@ -50,6 +48,14 @@ export class CategoryComponent implements OnInit {
     })
 
     this.title.setTitle(`Category | ${this.getParamId}`)
+
+    if (this.getParamId !== 'favorites') {
+      this.movieService.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
+        next: (result) => {
+          this.movieResult = [...this.movieResult, ...result]
+        }
+      })
+    }
   }
 
   saveToFavorites(data: Card) {

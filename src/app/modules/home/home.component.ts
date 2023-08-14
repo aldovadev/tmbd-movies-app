@@ -27,7 +27,7 @@ export class HomeComponent implements OnInit {
 
 
   hasMoreData: boolean = true
-  currentPage: number = 0
+  currentPage: number = 1
 
   scrollDistance: number = 2
   scrollUpDistance: number = 2
@@ -36,6 +36,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.bannerData()
+
+    this.movieService.homeMovieApiData(this.currentPage).subscribe({
+      next: (result) => {
+        this.upcomingMovieResult = [...this.upcomingMovieResult, ...result]
+      }
+    })
   }
 
   saveToFavorites(data: Card) {

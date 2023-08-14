@@ -25,7 +25,7 @@ export class GenreComponent implements OnInit {
   genreName: string = ''
 
   hasMoreData: boolean = true;
-  currentPage: number = 0;
+  currentPage: number = 1;
 
   scrollDistance: number = 2;
   scrollUpDistance: number = 2;
@@ -37,10 +37,14 @@ export class GenreComponent implements OnInit {
       const id = params.get('id');
       if (id !== null) {
         this.getParamId = id;
-        this.currentPage = 0;
         this.movieResult = []
         this.fetchGenres()
-        this.loadMoreMovies()
+      }
+    });
+
+    this.movieService.genreMovieApiData(this.currentPage, this.getParamId).subscribe({
+      next: (result) => {
+        this.movieResult = [...this.movieResult, ...result]
       }
     });
   }
