@@ -7,6 +7,7 @@ import { Banner } from 'src/app/models/banner.model';
 import { Card, MovieApiResponse } from 'src/app/models/card.model';
 import { GenreResponse } from 'src/app/models/genre.model';
 import { Detail, VideoApiResponse } from 'src/app/models/detail.model';
+import { ErrorMessage } from 'src/app/enums/error.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,7 @@ export class MovieApiService {
           }));
         }),
         catchError((error) => {
-          console.error('Error fetching banner data:', error);
+          console.error(ErrorMessage.Banner, error);
           throw error;
         })
       );
@@ -59,7 +60,7 @@ export class MovieApiService {
           }));
         }),
         catchError((error) => {
-          console.error('Error fetching home card data:', error);
+          console.error(ErrorMessage.home, error);
           throw error;
         })
       );
@@ -78,7 +79,7 @@ export class MovieApiService {
           }));
         }),
         catchError((error) => {
-          console.error('Error fetching category card data:', error);
+          console.error(ErrorMessage.category, error);
           throw error;
         })
       );
@@ -97,7 +98,7 @@ export class MovieApiService {
           }));
         }),
         catchError((error) => {
-          console.error('Error fetching genre card data:', error);
+          console.error(ErrorMessage.genre, error);
           throw error;
         })
       );
@@ -116,7 +117,7 @@ export class MovieApiService {
           }));
         }),
         catchError((error) => {
-          console.error('Error fetching genre card data:', error);
+          console.error(ErrorMessage.search, error);
           throw error;
         })
       );
@@ -142,7 +143,7 @@ export class MovieApiService {
           };
         }),
         catchError((error) => {
-          console.error('Error fetching movie detail data:', error);
+          console.error(ErrorMessage.detail, error);
           throw error;
         })
       );
@@ -153,7 +154,7 @@ export class MovieApiService {
     return this.http.get<VideoApiResponse>(`${this.baseurl}/movie/${id}/videos`, { headers })
       .pipe(
         catchError((error) => {
-          console.error('Error fetching movie video data:', error);
+          console.error(ErrorMessage.video, error);
           throw error;
         })
       );
@@ -164,7 +165,7 @@ export class MovieApiService {
     return this.http.get<GenreResponse>(`${this.baseurl}/genre/movie/list`, { headers })
       .pipe(
         catchError((error) => {
-          console.error('Error fetching movie genres:', error);
+          console.error(ErrorMessage.genrelist, error);
           throw error;
         })
       );

@@ -64,7 +64,6 @@ export class CategoryComponent implements OnInit {
       localStorage.setItem(this.key, JSON.stringify(storedData))
       this.favorites = storedData
     }
-
     if (this.getParamId === 'favorites') {
       this.movieResult = this.favorites
     }

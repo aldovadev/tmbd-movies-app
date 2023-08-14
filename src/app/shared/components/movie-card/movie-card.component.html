@@ -1,0 +1,34 @@
+<div class="rowposter">
+  <div class="card-container">
+    <ng-container *ngIf="movie.poster_path; else noPoster">
+      <img src="https://image.tmdb.org/t/p/w342{{ movie.poster_path }}" class="rowimg largeposter" alt="..."
+        [routerLink]="['/movie', movie.id]">
+    </ng-container>
+    <ng-template #noPoster>
+      <div class="no-poster">
+        <h3>No Poster Available</h3>
+        <h3>404</h3>
+      </div>
+    </ng-template>
+    <div class="title-container">
+      <a [routerLink]="['/movie', movie.id]">
+        {{movie.title}}
+      </a>
+    </div>
+    <div class="rating-star">
+      <ng-container *ngFor="let _ of [1, 2, 3, 4, 5]; let i = index">
+        <span *ngIf="starService.getFilledStars(movie.vote_average, _)" class="fa fa-star filled-star"></span>
+        <span *ngIf="starService.getHalfStars(movie.vote_average, _)" class="fa fa-star-half-o filled-star"></span>
+        <span *ngIf="starService.getEmptyStars(movie.vote_average, _)" class="fa fa-star-o"></span>
+      </ng-container>
+    </div>
+    <div class="control-container">
+      <h6>Rating: {{movie.vote_average}}</h6>
+      <button class="fav-button" (click)="saveToFavorites(movie)" [ngClass]="{ 'favorite': isInFavorites(movie) }">
+        <span class="fa" [ngClass]="{ 'fa-heart': isInFavorites(movie), 'fa-heart-o': !isInFavorites(movie) }"></span>
+        <span>Favorites</span>
+        <span class="tooltiptext">{{tooltipText}}</span>
+      </button>
+    </div>
+  </div>
+</div>

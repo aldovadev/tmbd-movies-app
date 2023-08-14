@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'category/:id', component: CategoryComponent },
   { path: 'genre/:id', component: GenreComponent },
   { path: 'search/:id', component: SearchComponent },
-  { path: 'movie/:id', component: MovieDetailsComponent }
+  { path: 'movie/:id', component: MovieDetailsComponent },
+  { path: '**', redirectTo: '/' }
 ];
 
 @NgModule({

@@ -48,7 +48,7 @@ export class GenreComponent implements OnInit {
   fetchGenres(): void {
     this.movieService.getMovieGenres().subscribe({
       next: (result) => {
-        // this.genres = [...this.genres, ...result]
+        this.genres = [...this.genres, ...result.genres]
         this.getGenreName(this.getParamId)
         this.title.setTitle(`Category | ${this.genreName}`);
       },

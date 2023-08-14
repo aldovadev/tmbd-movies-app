@@ -19,6 +19,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CapitalizeWordsPipe } from './shared/pipes/capitalize-word.pipe';
+import { MovieCardComponent } from './shared/components/movie-card/movie-card.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CapitalizeWordsPipe } from './shared/pipes/capitalize-word.pipe';
     MovieDetailsComponent,
     GenreComponent,
     CategoryComponent,
-    CapitalizeWordsPipe
+    CapitalizeWordsPipe,
+    MovieCardComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +42,7 @@ import { CapitalizeWordsPipe } from './shared/pipes/capitalize-word.pipe';
     MatTooltipModule,
     NgbModule,
     FormsModule,
+
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
@@ -47,7 +50,7 @@ import { CapitalizeWordsPipe } from './shared/pipes/capitalize-word.pipe';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [MovieApiService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
