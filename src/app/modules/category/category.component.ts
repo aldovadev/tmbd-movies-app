@@ -19,6 +19,8 @@ export class CategoryComponent implements OnInit {
 
   }
 
+  isVisible: boolean = false
+
   favorites: Card[] = []
 
   movieResult: Card[] = []
@@ -43,12 +45,24 @@ export class CategoryComponent implements OnInit {
           this.favorites = storedData
           this.movieResult = storedData
           this.hasMoreData = false
+          if (this.movieResult.length === 0) {
+            this.isVisible = true
+          }
+          else {
+            this.isVisible = false
+          }
         } else { this.hasMoreData = true }
 
         if (this.getParamId !== 'favorites') {
           this.movieService.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
             next: (result) => {
               this.movieResult = [...this.movieResult, ...result]
+              if (this.movieResult.length === 0) {
+                this.isVisible = true
+              }
+            },
+            error: (error) => {
+              this.isVisible = true
             }
           })
         }

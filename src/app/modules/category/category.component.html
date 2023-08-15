@@ -2,7 +2,8 @@
   <div class="row">
     <div class="desc-container">
       <h3>CATEGORY :</h3>
-      <h4> {{getParamId.replace('_',' ') | capitalizeWords}}</h4>
+      <h4 *ngIf="!isVisible"> {{getParamId.replace('_',' ') | capitalizeWords}}</h4>
+      <h4 *ngIf=" isVisible"> Not Found!</h4>
     </div>
 
     <div class="rowposter">
@@ -12,8 +13,20 @@
 
       <div *ngIf="hasMoreData" infinite-scroll [infiniteScrollDistance]="scrollDistance"
         [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">
-        Loading...
+        <span *ngIf="!isVisible">
+          Loading...
+        </span>
       </div>
     </div>
   </div>
+</div>
+
+<div class="contain" *ngIf="isVisible && getParamId !== 'favorites'">
+  <h1 style="width: 100%; display: grid; place-items: center;">404</h1>
+  <h2 style="width: 100%; display: grid; place-items: center;">Genre Not Found!</h2>
+</div>
+
+<div class="contain" *ngIf="isVisible && getParamId === 'favorites'">
+  <h1 style="width: 100%; display: grid; place-items: center;">404</h1>
+  <h2 style="width: 100%; display: grid; place-items: center;">Favorites Movie Empty!</h2>
 </div>

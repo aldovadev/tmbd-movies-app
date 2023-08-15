@@ -19,6 +19,8 @@ export class GenreComponent implements OnInit {
 
   }
 
+  isVisible: boolean = false
+
   movieResult: Card[] = []
   getParamId: string = ''
   genres: Genre[] = []
@@ -39,11 +41,20 @@ export class GenreComponent implements OnInit {
         this.getParamId = id;
         this.movieResult = []
         this.fetchGenres()
-        this.movieService.genreMovieApiData(this.currentPage, this.getParamId).subscribe({
-          next: (result) => {
-            this.movieResult = [...this.movieResult, ...result]
-          }
-        });
+        if (this.containsOnlyNumbers(this.getParamId)) {
+          this.movieService.genreMovieApiData(this.currentPage, this.getParamId).subscribe({
+            next: (result) => {
+              console.log(result)
+              this.movieResult = [...this.movieResult, ...result]
+              if (this.movieResult.length === 0) {
+                this.isVisible = true
+              }
+            }
+          })
+        }
+        else {
+          this.isVisible = true
+        }
       }
     });
   }
@@ -78,5 +89,10 @@ export class GenreComponent implements OnInit {
         this.movieResult = [...this.movieResult, ...result]
       }
     });
+  }
+
+  containsOnlyNumbers(input: string): boolean {
+    const regex = /^[0-9]+$/;
+    return regex.test(input);
   }
 }
