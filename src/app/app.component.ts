@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MovieApiService } from './services/movie/movie-api-service.service';
 import { Genre } from './models/genre.model';
+import { colorBg, shadowBg } from './enums/navbar.enums';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -15,8 +16,8 @@ export class AppComponent implements OnInit {
 
   genres: Genre[] = []
   navbg: object = {
-    'background-color': '#fbfbfb88',
-    'box-shadow': 'rgba(0, 0, 0, 0) 0px 3px 8px',
+    'background-color': colorBg.stickyOn,
+    'box-shadow': shadowBg.stickyOn,
   }
 
   inputValue: string = '';
@@ -42,13 +43,13 @@ export class AppComponent implements OnInit {
   @HostListener('document:scroll') scrollover() {
     if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       this.navbg = {
-        'background-color': '#fbfbfb',
-        'box-shadow': 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+        'background-color': colorBg.stickyOff,
+        'box-shadow': shadowBg.stickyOff,
       }
     } else {
       this.navbg = {
-        'background-color': '#fbfbfb88',
-        'box-shadow': 'rgba(0, 0, 0, 0) 0px 3px 8px',
+        'background-color': colorBg.stickyOn,
+        'box-shadow': shadowBg.stickyOn,
       }
     }
   }

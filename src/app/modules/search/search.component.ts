@@ -13,8 +13,6 @@ import { Card } from 'src/app/models/card.model'
 })
 export class SearchComponent implements OnInit {
 
-  isVisible: boolean = false
-
   constructor(
     private movieService: MovieApiService,
     public starService: StarService,
@@ -25,6 +23,8 @@ export class SearchComponent implements OnInit {
     this.title.setTitle('Search movies - Aldova')
     this.meta.updateTag({ name: 'description', content: 'search here movies like avatar,war etc' })
   }
+
+  isVisible: boolean = false
 
   searchResult: Card[] = []
   getParamId: string = ''
@@ -37,12 +37,15 @@ export class SearchComponent implements OnInit {
   })
 
   ngOnInit(): void {
-    const id = this.router.snapshot.paramMap.get('id')
-    if (id !== null) {
-      this.getParamId = id
-      this.searchForm.get('movieName')?.setValue(id);
-    }
-    this.submitForm()
+
+    this.router.paramMap.subscribe((params) => {
+      const id = params.get('id')
+      if (id !== null) {
+        this.getParamId = id
+        this.searchForm.get('movieName')?.setValue(id);
+      }
+      this.submitForm()
+    })
   }
 
   submitForm() {
@@ -54,9 +57,7 @@ export class SearchComponent implements OnInit {
     this.movieService.getSearchMovie(searchTerm).subscribe({
       next: (result) => {
         this.searchResult = [...this.movieResult, ...result]
-        if (this.searchResult.length === 0) {
-          this.isVisible = true
-        }
+        this.isVisible = true
       }
     })
   }
