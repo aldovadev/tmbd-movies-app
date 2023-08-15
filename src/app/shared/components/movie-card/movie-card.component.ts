@@ -46,9 +46,7 @@ export class MovieCardComponent {
       } else {
         storedData = storedData.filter((item) => item.id !== this.movie!.id);
         localStorage.setItem(this.key, JSON.stringify(storedData));
-        if (storedData.length === 0) {
-          location.reload()
-        }
+        location.reload()
         Swal.fire({
           toast: true,
           position: 'bottom-end',
