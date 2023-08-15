@@ -28,6 +28,7 @@
   <h2 style="width: 100%; display: grid; place-items: center;">Favorites Movie Empty!</h2>
 </div>
 
-<div *ngIf="!isVisible" style="width: 100%; display: grid; place-items:center;" class="loading">
+<div *ngIf="!isVisible && getParamId!=='favorites'" style="width: 100%; display: grid; place-items:center;"
+  class="loading">
   <img style="width: 100px;" src="../../../assets/animation/loading.gif" alt="">
 </div>

@@ -47,16 +47,16 @@ export class GenreComponent implements OnInit {
               console.log(result)
               this.movieResult = [...this.movieResult, ...result]
               if (this.movieResult.length === 0) {
-                this.isVisible = true
+                this.isVisible = false
               }
               else {
-                this.isVisible = false
+                this.isVisible = true
               }
             }
           })
         }
         else {
-          this.isVisible = true
+          this.isVisible = false
         }
       }
     });

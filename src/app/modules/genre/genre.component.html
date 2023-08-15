@@ -3,7 +3,7 @@
     <div class="desc-container">
       <h3>GENRE :</h3>
       <h4> {{genreName}}</h4>
-      <h4 *ngIf="isVisible"> Not Found!</h4>
+      <h4 *ngIf="!isVisible"> Not Found!</h4>
     </div>
 
     <div class="rowposter">
@@ -17,11 +17,11 @@
     </div>
   </div>
 
-  <div class="contain" *ngIf="isVisible">
+  <div class="contain" *ngIf="!isVisible">
     <h1 style="width: 100%; display: grid; place-items: center;">404</h1>
     <h2 style="width: 100%; display: grid; place-items: center;">Genre Not Found!</h2>
   </div>
 
-  <div *ngIf="!isVisible" style="width: 100%; display: grid; place-items:center;" class="loading">
+  <div *ngIf="isVisible" style="width: 100%; display: grid; place-items:center;" class="loading">
     <img style="width: 100px;" src="../../../assets/animation/loading.gif" alt="">
   </div>
