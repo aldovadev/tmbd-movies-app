@@ -22,6 +22,8 @@ export class HomeComponent implements OnInit {
     this.meta.updateTag({ name: 'description', content: 'watch online movies' })
   }
 
+  isVisible: boolean = true
+
   bannerResult: Banner[] = []
   upcomingMovieResult: Card[] = []
 
@@ -50,10 +52,12 @@ export class HomeComponent implements OnInit {
     }
 
     this.currentPage++
+    this.isVisible = false
 
     this.movieService.homeMovieApiData(this.currentPage).subscribe({
       next: (result) => {
         this.upcomingMovieResult = [...this.upcomingMovieResult, ...result]
+        this.isVisible = true
       }
     })
   }

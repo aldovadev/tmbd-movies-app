@@ -19,7 +19,7 @@ export class GenreComponent implements OnInit {
 
   }
 
-  isVisible: boolean = false
+  isVisible: boolean = true
 
   movieResult: Card[] = []
   getParamId: string = ''
@@ -48,6 +48,9 @@ export class GenreComponent implements OnInit {
               this.movieResult = [...this.movieResult, ...result]
               if (this.movieResult.length === 0) {
                 this.isVisible = true
+              }
+              else {
+                this.isVisible = false
               }
             }
           })

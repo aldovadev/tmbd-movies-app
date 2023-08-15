@@ -13,6 +13,8 @@ import { Card } from 'src/app/models/card.model'
 })
 export class SearchComponent implements OnInit {
 
+  isVisible: boolean = false
+
   constructor(
     private movieService: MovieApiService,
     public starService: StarService,
@@ -52,6 +54,9 @@ export class SearchComponent implements OnInit {
     this.movieService.getSearchMovie(searchTerm).subscribe({
       next: (result) => {
         this.searchResult = [...this.movieResult, ...result]
+        if (this.searchResult.length === 0) {
+          this.isVisible = true
+        }
       }
     })
   }

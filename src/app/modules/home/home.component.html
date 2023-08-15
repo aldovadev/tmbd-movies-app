@@ -36,8 +36,11 @@
 
       <div *ngIf="hasMoreData" infinite-scroll [infiniteScrollDistance]="scrollDistance"
         [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">
-        Loading...
       </div>
     </div>
   </div>
+</div>
+
+<div *ngIf="!isVisible" style="width: 100%; display: grid; place-items:center;" class="loading">
+  <img style="width: 100px;" src="../../../assets/animation/loading.gif" alt="">
 </div>
