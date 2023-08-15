@@ -22,8 +22,6 @@ export class MovieCardComponent {
     public starService: StarService) {
   }
 
-  isVisible: boolean = true
-
   key: string = 'favoritesMovies';
   tooltipText: string = tooltipMessage.Add;
 
@@ -46,7 +44,6 @@ export class MovieCardComponent {
       } else {
         storedData = storedData.filter((item) => item.id !== this.movie!.id);
         localStorage.setItem(this.key, JSON.stringify(storedData));
-        location.reload()
         Swal.fire({
           toast: true,
           position: 'bottom-end',
@@ -56,7 +53,9 @@ export class MovieCardComponent {
           text: ToasterMessage.Remove,
           icon: 'info',
         });
-        this.isVisible = false
+        if (this.param === 'favorites') {
+          location.reload()
+        }
       }
     }
   }

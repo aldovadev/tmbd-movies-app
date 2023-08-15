@@ -8,14 +8,11 @@
 
     <div class="rowposter">
       <ng-container *ngFor="let item of movieResult">
-        <app-movie-card [movie]="item"></app-movie-card>
+        <app-movie-card [movie]="item" [param]="getParamId"></app-movie-card>
       </ng-container>
 
       <div *ngIf="hasMoreData" infinite-scroll [infiniteScrollDistance]="scrollDistance"
         [infiniteScrollUpDistance]="scrollUpDistance" (scrolled)="loadMoreMovies()">
-        <span *ngIf="!isVisible">
-          Loading...
-        </span>
       </div>
     </div>
   </div>
@@ -29,4 +26,8 @@
 <div class="contain" *ngIf="isVisible && getParamId === 'favorites'">
   <h1 style="width: 100%; display: grid; place-items: center;">404</h1>
   <h2 style="width: 100%; display: grid; place-items: center;">Favorites Movie Empty!</h2>
+</div>
+
+<div style="width: 100%; display: grid; place-items:center;" *ngIf="!isVisible" class="loading">
+  <img style="width: 100px;" src="../../../assets/animation/loading.gif" alt="">
 </div>

@@ -1,4 +1,4 @@
-<div *ngIf="isVisible" class="rowposter">
+<div class="rowposter">
   <div class="card-container">
     <ng-container *ngIf="movie.poster_path; else noPoster">
       <img src="https://image.tmdb.org/t/p/w342{{ movie.poster_path }}" class="rowimg largeposter" alt="..."

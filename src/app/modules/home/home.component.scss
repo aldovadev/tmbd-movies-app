@@ -44,7 +44,29 @@ $color-background: #00000033;
 }
 
 .contain {
-  padding: 50px 30px;
+  padding: 8% 30px;
+
+  .row-input {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 5%;
+
+    .input {
+      width: 100%;
+    }
+
+    .search-button {
+      height: 40px;
+      width: 80px;
+      background-color: $color-pink;
+      border: none;
+      color: white;
+    }
+  }
+
   .row {
     display: flex;
     flex-direction: row;
@@ -56,7 +78,6 @@ $color-background: #00000033;
         color: $color-gray;
         margin: 0;
       }
-
       h4 {
         color: $color-pink;
         margin: 0;
@@ -64,161 +85,11 @@ $color-background: #00000033;
       }
     }
 
-    .no-poster {
-      @include flex-center;
-      margin: 0 auto;
-      margin-top: 30px;
-      margin-bottom: 0;
-      height: 400px;
-      width: 270px;
-      background-color: $color-gray;
-
-      h3 {
-        color: $color-white;
-        text-align: center;
-        width: 200px;
-      }
-    }
-
     .rowposter {
-      display: flex;
+      @include flex-center;
       flex-direction: row;
       flex-wrap: wrap;
       justify-content: space-around;
-      justify-items: center;
-
-      .card-container {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 320px;
-        margin: 20px 10px;
-        transition: 0.4s;
-
-        .rowimg {
-          object-fit: contain;
-          box-sizing: content-box;
-          transition: transform 450ms;
-          margin-top: 30px;
-        }
-
-        .rating-star {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-around;
-          margin: auto;
-          width: 60%;
-
-          .filled-star {
-            color: $color-yellow;
-            text-shadow: 0 0 1px $color-black;
-            font-size: 20px;
-          }
-
-          span {
-            font-size: 20px;
-          }
-        }
-
-        .control-container {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-          padding: 15px 30px;
-
-          .fav-button {
-            @include flex-center;
-            border: none;
-            height: 40px;
-            width: 120px;
-            font-size: 15px;
-            background-color: $color-black;
-            color: $color-white;
-            border-radius: 5px;
-            cursor: pointer;
-
-            .tooltiptext {
-              visibility: hidden;
-              width: 120px;
-              background-color: $color-background;
-              color: $color-black;
-              text-align: center;
-              border-radius: 6px;
-              padding: 5px 0;
-              position: absolute;
-              z-index: 1;
-              margin-top: 100px;
-            }
-
-            .tooltiptext::after {
-              content: " ";
-              position: absolute;
-              bottom: 100%;
-              left: 50%;
-              margin-left: -5px;
-              border-width: 5px;
-              border-style: solid;
-              border-color: transparent transparent $color-background
-                transparent;
-            }
-
-            span {
-              margin: 0 5px;
-            }
-
-            h6 {
-              margin: 0;
-            }
-
-            button {
-              margin: 0;
-            }
-          }
-
-          .fav-button.favorite {
-            background-color: $color-pink;
-            transition: 0.5s;
-          }
-
-          .fav-button:hover {
-            background-color: $color-white;
-            color: $color-pink;
-            transition: 0.5s;
-
-            .tooltiptext {
-              visibility: visible;
-            }
-          }
-        }
-
-        .title-container {
-          @include flex-center;
-          padding: 15px 30px;
-
-          a {
-            color: $color-gray;
-            text-decoration: none;
-            text-align: center;
-            margin: 0;
-          }
-        }
-
-        .largeposter {
-          height: 400px;
-          width: 320px;
-        }
-
-        .largeposter:hover {
-          cursor: pointer;
-        }
-      }
-
-      .card-container:hover {
-        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-        transform: scale(1.01);
-        transition: 0.4s;
-      }
     }
   }
 }
