@@ -22,15 +22,12 @@ export class MovieCardComponent {
     public starService: StarService) {
   }
 
-  hasMoreData: boolean = true;
-  currentPage: number = 0;
+  isVisible: boolean = true
 
-  scrollDistance: number = 2;
-  scrollUpDistance: number = 2;
   key: string = 'favoritesMovies';
   tooltipText: string = tooltipMessage.Add;
 
-  saveToFavorites(data: Card) {
+  saveToFavorites() {
     if (this.movie) {
       let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]');
 
@@ -58,11 +55,12 @@ export class MovieCardComponent {
           text: ToasterMessage.Remove,
           icon: 'info',
         });
+        this.isVisible = false
       }
     }
   }
 
-  isInFavorites(data: Card): boolean {
+  isInFavorites(): boolean {
     if (this.movie) {
       let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]');
       if (storedData.some((item) => item.id === this.movie!.id)) {

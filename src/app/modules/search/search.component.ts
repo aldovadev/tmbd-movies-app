@@ -55,27 +55,4 @@ export class SearchComponent implements OnInit {
       }
     })
   }
-
-  saveToFavorites(data: Card) {
-    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
-
-    if (!storedData.some((item) => item.id === data.id)) {
-      storedData.push(data)
-      localStorage.setItem(this.key, JSON.stringify(storedData))
-    } else {
-      storedData = storedData.filter((item) => item.id !== data.id)
-      localStorage.setItem(this.key, JSON.stringify(storedData))
-    }
-  }
-
-  isInFavorites(data: Card): boolean {
-    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
-    if (storedData.some((item) => item.id === data.id)) {
-      this.tooltipText = 'Remove from Favorites'
-      return true
-    } else {
-      this.tooltipText = 'Add to Favorites'
-      return false
-    }
-  }
 }

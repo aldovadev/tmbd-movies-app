@@ -43,48 +43,19 @@ export class CategoryComponent implements OnInit {
           this.favorites = storedData
           this.movieResult = storedData
           this.hasMoreData = false
-        } else this.hasMoreData = true
+        } else { this.hasMoreData = true }
+
+        if (this.getParamId !== 'favorites') {
+          this.movieService.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
+            next: (result) => {
+              this.movieResult = [...this.movieResult, ...result]
+            }
+          })
+        }
       }
     })
 
     this.title.setTitle(`Category | ${this.getParamId}`)
-
-    if (this.getParamId !== 'favorites') {
-      this.movieService.categoryMovieApiData(this.currentPage, this.getParamId).subscribe({
-        next: (result) => {
-          this.movieResult = [...this.movieResult, ...result]
-        }
-      })
-    }
-  }
-
-  saveToFavorites(data: Card) {
-    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
-
-    if (!storedData.some((item) => item.id === data.id)) {
-      storedData.push(data)
-      localStorage.setItem(this.key, JSON.stringify(storedData))
-      this.favorites = storedData
-    } else {
-      storedData = storedData.filter((item) => item.id !== data.id)
-      localStorage.setItem(this.key, JSON.stringify(storedData))
-      this.favorites = storedData
-    }
-    if (this.getParamId === 'favorites') {
-      this.movieResult = this.favorites
-    }
-  }
-
-
-  isInFavorites(data: Card): boolean {
-    let storedData: Card[] = JSON.parse(localStorage.getItem(this.key) || '[]')
-    if (storedData.some((item) => item.id === data.id)) {
-      this.tooltipText = 'Remove from Favorites'
-      return true
-    } else {
-      this.tooltipText = 'Add to Favorites'
-      return false
-    }
   }
 
   loadMoreMovies() {

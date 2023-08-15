@@ -1,4 +1,4 @@
-<div class="rowposter">
+<div *ngIf="isVisible" class="rowposter">
   <div class="card-container">
     <ng-container *ngIf="movie.poster_path; else noPoster">
       <img src="https://image.tmdb.org/t/p/w342{{ movie.poster_path }}" class="rowimg largeposter" alt="..."
@@ -24,8 +24,8 @@
     </div>
     <div class="control-container">
       <h6>Rating: {{movie.vote_average}}</h6>
-      <button class="fav-button" (click)="saveToFavorites(movie)" [ngClass]="{ 'favorite': isInFavorites(movie) }">
-        <span class="fa" [ngClass]="{ 'fa-heart': isInFavorites(movie), 'fa-heart-o': !isInFavorites(movie) }"></span>
+      <button class="fav-button" (click)="saveToFavorites()" [ngClass]="{ 'favorite': isInFavorites() }">
+        <span class="fa" [ngClass]="{ 'fa-heart': isInFavorites(), 'fa-heart-o': !isInFavorites() }"></span>
         <span>Favorites</span>
         <span class="tooltiptext">{{tooltipText}}</span>
       </button>
