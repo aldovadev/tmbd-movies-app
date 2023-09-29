@@ -1,7 +1,7 @@
 $color-black: #000;
 $color-white: #fff;
 $color-gray: #333;
-$color-pink: #d90166;
+$color-pink: tomato;
 $color-yellow: yellow;
 $color-background: #00000033;
 
@@ -38,7 +38,7 @@ $color-background: #00000033;
 
     .search-button:hover {
       background-color: #fbfbfb;
-      color: #d90166;
+      color: tomato;
       transition: 0.5s;
     }
   }

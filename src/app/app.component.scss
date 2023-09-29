@@ -1,4 +1,4 @@
-$color-pink: #d90166;
+$color-pink: tomato;
 $color-white: #fbfbfb;
 $color-gray: #333;
 $color-shadow: rgba(0, 0, 0, 0.24);
@@ -16,12 +16,12 @@ $color-shadow: rgba(0, 0, 0, 0.24);
   font-size: 12px;
 
   img {
-    height: 30px;
+    margin-left: 20px;
+    height: 40px;
+    width: auto;
   }
 
   p {
-    position: relative;
-    top: -10px;
     text-align: right;
     margin: 0;
   }

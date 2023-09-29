@@ -1,10 +1,10 @@
 $color-background: #333333;
 $color-text: #fbfbfb;
 $color-hover-bg: #fbfbfb;
-$color-hover-text: #d90166;
+$color-hover-text: tomato;
 $color-tooltip-bg: #00000033;
 $color-tooltip-text: #000;
-$color-favorite-bg: #d90166;
+$color-favorite-bg: tomato;
 
 @mixin center {
   display: flex;
